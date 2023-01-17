@@ -1,0 +1,23 @@
+{
+    "env": {
+        "es2021": true,
+        "node": true
+    },
+    "extends": ["standard-with-typescript", "prettier", "plugin:prettier/recommended"],
+    "plugins": ["prettier", "hexagonal-architecture"],
+    "overrides": [
+        {
+            "files":["contexts/{backend,frontend}/*/src/**/*.ts"],
+            "rules": {
+                "hexagonal-architecture/enforce": ["error"]
+            }
+        }
+    ],
+    "parserOptions": {
+        "ecmaVersion": "latest",
+        "sourceType": "module"
+    },
+    "rules": {
+        "prettier/prettier" : "error"
+    }
+}
