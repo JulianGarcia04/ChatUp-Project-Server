@@ -10,3 +10,5 @@ The technologies that I will use in the backend side is Express as main framewor
 ## - jsonwebtoken
 ## - socket.io
 ## - express session
+## - cors 
+## - morgan 
