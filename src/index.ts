@@ -1,11 +1,16 @@
-import Config from "./app";
+import Config from './app';
 
 class Server extends Config {
-    public listen(){
-        this.app.listen(4000, ()=>{
-            console.log("Server run in the port 4000");
-        })
-    }
+  private _PORT: number;
+  constructor() {
+    super();
+    this._PORT = this.app.get('PORT');
+  }
+  public listen() {
+    this.app.listen(this._PORT, () => {
+      console.log(`Server run in the port ${this._PORT}`);
+    });
+  }
 }
 
-new Server().listen()
+new Server().listen();
