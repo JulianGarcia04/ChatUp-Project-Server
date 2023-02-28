@@ -4,9 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "ts-node-dev src/index.ts",
+    "dev": "docker compose rm & docker compose -f docker-compose-dev.yml up & NODE_ENV=development ts-node-dev src/index.ts",
     "build": "tsc",
-    "start": "node dist/index.js",
+    "start": "docker compose rm & docker compose -f docker-compose.yml up & npm run build & NODE_ENV=production node dist/index.js",
+    "test": "docker compose rm & docker compose -f docker-compose-testing.yml up & NODE_ENV=test ts-node-dev src/index.ts",
     "lint": "eslint src/",
     "lint-fix": "eslint src/ --fix"
   },

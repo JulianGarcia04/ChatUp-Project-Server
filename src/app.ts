@@ -5,6 +5,9 @@ abstract class Config {
   private _app: Express = express();
   constructor() {
     this._app.set('PORT', config.PORT);
+    this._app.get('/', (req, res) => {
+      res.send(config.ENVIROMENT);
+    });
   }
 
   public get app(): Express {
