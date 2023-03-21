@@ -1,5 +1,4 @@
-import { type ITask } from './interfaces/ITask';
-import { type TaskProps } from './interfaces/ITaskProps';
+import { type TaskProps, type ITask } from '../interfaces';
 
 class Task implements ITask {
   private readonly _id: string | number;

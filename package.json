@@ -9,7 +9,8 @@
     "start": "docker compose rm & docker compose -f docker-compose.yml up & npm run build & NODE_ENV=production node dist/index.js",
     "test": "docker compose rm & docker compose -f docker-compose-testing.yml up & NODE_ENV=test ts-node-dev src/index.ts",
     "lint": "eslint src/",
-    "lint-fix": "eslint src/ --fix"
+    "lint-fix": "eslint src/ --fix",
+    "format:check": "npx prettier --check ./src"
   },
   "keywords": [],
   "author": "Julian Garcia <jcgrrincon@gmail.com>",
