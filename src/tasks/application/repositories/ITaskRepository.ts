@@ -12,4 +12,4 @@ export interface IOneTask extends IOneRepository<ITask> {}
 
 export interface ICreateTask extends ICreateRepository<ITask> {}
 
-export interface IEditTask extends IEditRepository {}
+export interface IEditTask extends IEditRepository<ITask> {}

@@ -2,7 +2,8 @@ import { describe, expect, test, jest } from '@jest/globals';
 import { GetTaskById } from '../application';
 import { type IOneTask } from 'tasks/application/repositories/ITaskRepository';
 import { type IDTO } from 'tasks/application/useCases/getTaskById/DTO';
-import { type ITask, type IException } from 'tasks/domain/';
+import { type ITask } from 'tasks/domain/';
+import { type Exception } from 'common/Exception';
 
 const OneTaskMock = jest.fn();
 
@@ -28,7 +29,7 @@ describe('test of the get task by id use case', () => {
         token: '',
       };
 
-      const exceptionObject: IException = {
+      const exceptionObject: Exception = {
         code: 403,
         name: 'please sign in',
         message: 'dont has the token',
@@ -47,7 +48,7 @@ describe('test of the get task by id use case', () => {
           'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c',
       };
 
-      const exceptionObject: IException = {
+      const exceptionObject: Exception = {
         code: 500,
         name: 'error in the server',
         message: 'error with id',
@@ -66,7 +67,7 @@ describe('test of the get task by id use case', () => {
           'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c',
       };
 
-      const exceptionObject: IException = {
+      const exceptionObject: Exception = {
         code: 500,
         name: 'error in the server',
         message: 'error with id',

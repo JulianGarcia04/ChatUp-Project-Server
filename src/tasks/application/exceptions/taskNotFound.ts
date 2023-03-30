@@ -1,6 +1,6 @@
-import { Exception } from 'tasks/domain';
+import { ExceptionImplementation } from 'common/implementations';
 
-class TaskNotFound extends Exception {
+class TaskNotFound extends ExceptionImplementation {
   constructor() {
     super({
       code: 404,

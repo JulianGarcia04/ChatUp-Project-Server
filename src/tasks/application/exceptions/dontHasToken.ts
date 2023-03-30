@@ -1,6 +1,6 @@
-import { Exception } from 'tasks/domain';
+import { ExceptionImplementation } from 'common/implementations';
 
-class DontHasToken extends Exception {
+class DontHasToken extends ExceptionImplementation {
   constructor() {
     super({
       code: 403,

@@ -1,10 +1,10 @@
-import { type IUseCase } from '../../common/IUseCase';
+import { type UseCase } from 'common/UseCase';
 import { type ITask } from 'tasks/domain/interfaces';
 import { type IOneTask } from 'tasks/application/repositories/ITaskRepository';
 import { type IDTO } from './DTO';
 import { DontHasToken, IncorrectId } from '../../exceptions';
 
-class GetTaskById implements IUseCase<ITask, IDTO> {
+class GetTaskById implements UseCase<ITask, IDTO> {
   private readonly OneTask: IOneTask;
   constructor(OneTask: IOneTask) {
     this.OneTask = OneTask;

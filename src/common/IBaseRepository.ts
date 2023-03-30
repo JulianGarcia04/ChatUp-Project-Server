@@ -5,13 +5,13 @@ export interface IAllRepository<TDomain> {
 }
 
 export interface IOneRepository<TDomain> {
-  withId(id: number | string): TDomain | any;
+  withId(id: number | string): TDomain;
 }
 
 export interface ICreateRepository<TDomain> {
   save(props: TDomain): void;
 }
 
-export interface IEditRepository {
-  withId(id: string | number, props: unknown): void;
+export interface IEditRepository<TDomain> {
+  withId(id: string | number, props: unknown): TDomain;
 }

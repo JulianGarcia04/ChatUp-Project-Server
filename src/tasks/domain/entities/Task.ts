@@ -1,4 +1,4 @@
-import { type TaskProps, type ITask } from '../interfaces';
+import { type ITask } from '../interfaces';
 
 class Task implements ITask {
   private readonly _id: string | number;
@@ -7,12 +7,12 @@ class Task implements ITask {
   private readonly _isReady: boolean;
   private readonly _isDelete: boolean;
 
-  private constructor({ id, title, description }: TaskProps) {
+  private constructor({ id, title, description, isReady, isDelete }: ITask) {
     this._id = id;
     this._title = title;
     this._description = description;
-    this._isReady = false;
-    this._isDelete = false;
+    this._isReady = isReady;
+    this._isDelete = isDelete;
   }
 
   // Getters
@@ -36,7 +36,7 @@ class Task implements ITask {
     return this._isDelete;
   }
 
-  public static create(props: TaskProps): ITask {
+  public static create(props: ITask): ITask {
     const task = new Task(props);
 
     return task;

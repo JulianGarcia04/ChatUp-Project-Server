@@ -1,3 +1,3 @@
-import { type TaskProps } from 'tasks/domain/interfaces/ITaskProps';
+import { type ITask } from 'tasks/domain';
 
-export interface createTaskDTO extends TaskProps {}
+export interface createTaskDTO extends ITask {}

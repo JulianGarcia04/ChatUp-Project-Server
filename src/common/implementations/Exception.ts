@@ -1,9 +1,9 @@
-import { type IException } from '../interfaces';
+import { type Exception } from '../Exception';
 
-class Exception extends Error implements IException {
-  protected props: IException;
+class ExceptionImplementation extends Error implements Exception {
+  protected props: Exception;
 
-  constructor(props: IException) {
+  constructor(props: Exception) {
     super(props.name);
     this.props = props;
   }
@@ -21,4 +21,4 @@ class Exception extends Error implements IException {
   }
 }
 
-export default Exception;
+export default ExceptionImplementation;

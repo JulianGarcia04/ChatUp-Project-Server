@@ -1,6 +1,6 @@
-import { Exception } from 'tasks/domain';
+import { ExceptionImplementation } from 'common/implementations';
 
-class IncorrectId extends Exception {
+class IncorrectId extends ExceptionImplementation {
   constructor() {
     super({
       code: 500,
