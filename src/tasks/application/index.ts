@@ -1,2 +1,7 @@
-export { default as CreateTask } from './useCases/createTask';
-export { default as GetTaskById } from './useCases/getTaskById';
+export { ChangeState, CreateTask, DeleteTask, GetTaskById } from './useCases';
+export {
+  type IOneTask,
+  type IAllTask,
+  type ICreateTask,
+  type IEditTask,
+} from './repositories/ITaskRepository';

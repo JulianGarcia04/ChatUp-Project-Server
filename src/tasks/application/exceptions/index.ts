@@ -5,3 +5,4 @@ export { default as CantUpdateData } from './cantUpdateData';
 export { default as TaskIsDuplicate } from './taskIsDuplicate';
 export { default as CantCreatedDomainObject } from './cantCreatedDomainObject';
 export { default as CantBeSaved } from './cantBeSaved';
+export { default as CantDeleteTask } from './cantDeleteTask';
