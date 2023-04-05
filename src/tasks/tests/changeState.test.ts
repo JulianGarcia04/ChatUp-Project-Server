@@ -1,24 +1,19 @@
-import { describe, expect, test, jest } from '@jest/globals';
+import { describe, expect, test, beforeEach } from '@jest/globals';
 import {
   type IOneTask,
   type IEditTask,
 } from 'tasks/application/repositories/ITaskRepository';
-import { type ITask, TaskDomain } from 'tasks/domain';
+import { type ITask } from 'tasks/domain';
 import { ChangeState } from 'tasks/application/useCases';
 import { type DTO } from 'tasks/application/useCases/changeState/DTO';
+import { type toDomain } from 'common';
+import { MessageImplementation } from 'common/implementations';
+import { TaskNotFound } from '../application/exceptions';
+import { MockClass } from 'common/mocks';
+import { RepositorysMockFns, mapperToDomain } from './mocks';
 
-const OneTaskMock = jest.fn();
-const EditTaskMock = jest.fn();
-
-class ToDomain {
-  execute(data: unknown): ITask {
-    const mapper = TaskDomain.create(data as ITask);
-    console.log(mapper);
-    return mapper;
-  }
-}
-
-const task: ITask = {
+// const data
+const task = {
   id: 1,
   title: 'Prueba',
   description: 'La descripción de la prueba',
@@ -26,41 +21,52 @@ const task: ITask = {
   isDelete: false,
 };
 
-OneTaskMock.prototype.withId = jest.fn((id: string & number): ITask | null => {
-  if (id > 1) {
-    return null;
-  }
-  return task;
+// mapper mock class
+const ToDomain = MockClass(
+  ['execute'],
+  [(task: ITask) => mapperToDomain(task)],
+);
+
+const toDomainImplementation = new ToDomain() as toDomain<ITask>;
+
+// class where contain the functions repositories
+const repositoryMock = new RepositorysMockFns(toDomainImplementation);
+
+// before each function
+beforeEach(() => {
+  repositoryMock.tasks = [];
+  repositoryMock.tasks.push(task);
 });
 
-EditTaskMock.prototype.withId = jest.fn(
-  (id: number | string, props: unknown): ITask => {
-    const data = {
-      ...task,
-      ...(props as ITask),
-    };
-    const toTask = new ToDomain().execute(data);
-    return toTask;
-  },
+// mock repository class
+const OneTaskMock = MockClass(
+  ['withId'],
+  [async (id: string | number) => await repositoryMock.findFn(id)],
+);
+const EditTaskMock = MockClass(
+  ['withId'],
+  [
+    async (id: string | number, props: unknown) => {
+      await repositoryMock.editFn(id, props);
+    },
+  ],
 );
 
 describe('test the change state task usecase', () => {
   const oneTask = new OneTaskMock() as IOneTask;
   const editTask = new EditTaskMock() as IEditTask;
   const changeStateUseCase = new ChangeState(editTask, oneTask);
-  test('test when the task dont exists, I going to give the params with id is a code that doesnt exits, then must return error', () => {
+  test('test when the task dont exists, I going to give the params with id is a code that doesnt exits, then must return error', async () => {
     const props: DTO = { id: 3, isReady: true };
-    expect(() => changeStateUseCase.execute(props)).toThrowError(
-      'Task no found',
-    );
+
+    const executeFn = changeStateUseCase.execute(props);
+    await expect(executeFn).rejects.toBeInstanceOf(TaskNotFound);
   });
 
-  test('test when change the state in the task, I going to give the params for that want change the state, must return a confirm message', () => {
+  test('test when change the state in the task, I going to give the params for that want change the state, must return a confirm message', async () => {
     const props: DTO = { id: 1, isReady: true };
-    const toReturn = {
-      code: 200,
-      message: 'your task change the state',
-    };
-    expect(changeStateUseCase.execute(props)).toMatchObject(toReturn);
+    const executeFn = await changeStateUseCase.execute(props);
+
+    expect(executeFn).toBeInstanceOf(MessageImplementation);
   });
 });

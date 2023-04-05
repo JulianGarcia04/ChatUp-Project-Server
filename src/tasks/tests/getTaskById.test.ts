@@ -1,82 +1,95 @@
-import { describe, expect, test, jest } from '@jest/globals';
+import { describe, expect, test, beforeEach } from '@jest/globals';
+import { RepositorysMockFns, mapperToDomain } from './mocks';
+import { MockClass } from 'common/mocks';
 import { GetTaskById } from '../application';
+import {
+  DontHasToken,
+  TaskNotFound,
+  IncorrectId,
+} from '../application/exceptions';
 import { type IOneTask } from 'tasks/application/repositories/ITaskRepository';
+import { type toDomain } from 'common';
 import { type IDTO } from 'tasks/application/useCases/getTaskById/DTO';
-import { type ITask } from 'tasks/domain/';
-import { type Exception } from 'common/Exception';
+import { type ITask, TaskImplementation } from 'tasks/domain';
 
-const OneTaskMock = jest.fn();
+// mapper mock class
+const ToDomain = MockClass(
+  ['execute'],
+  [(task: ITask) => mapperToDomain(task)],
+);
+
+const toDomainImplementation = new ToDomain() as toDomain<ITask>;
+
+// repositoryFns
+const repositoryMock = new RepositorysMockFns(toDomainImplementation);
+
+const OneTaskMock = MockClass(
+  ['withId'],
+  [async (id: string | number) => await repositoryMock.findFn(id)],
+);
+
+// before each function
+beforeEach(() => {
+  repositoryMock.tasks = [];
+  repositoryMock.tasks.push({
+    id: 1,
+    title: 'Hola mundo',
+    description: 'mi primer hola mundo',
+    isReady: false,
+    isDelete: false,
+  });
+});
 
 describe('test of the get task by id use case', () => {
   describe('test props errors', () => {
-    const task: ITask = {
-      id: 1,
-      title: 'hola mundo',
-      description: 'este es un saludo',
-      isReady: false,
-      isDelete: false,
-    };
-    // OneTask repository mock
-    OneTaskMock.prototype.withId = jest.fn((id: string | number): ITask => {
-      return task;
-    });
     const OneTask: IOneTask = new OneTaskMock() as IOneTask;
     const GetTaskByIdUseCase = new GetTaskById(OneTask);
 
-    test('test when the token isnt in the props then has return a error', () => {
+    test('test when the token isnt in the props then has return a error', async () => {
       const Props: IDTO = {
         id: 1,
         token: '',
       };
 
-      const exceptionObject: Exception = {
-        code: 403,
-        name: 'please sign in',
-        message: 'dont has the token',
-        stack: 'dont has the token, please sign in',
-      };
+      const executeFn = GetTaskByIdUseCase.execute(Props);
 
-      expect(() => GetTaskByIdUseCase.execute(Props)).toThrowError(
-        exceptionObject.name,
-      );
+      await expect(executeFn).rejects.toBeInstanceOf(DontHasToken);
     });
 
-    test('test when the id is empty string then must return a error', () => {
+    test('test when the id is empty string then must return a error', async () => {
       const Props: IDTO = {
         id: '',
         token:
           'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c',
       };
 
-      const exceptionObject: Exception = {
-        code: 500,
-        name: 'error in the server',
-        message: 'error with id',
-        stack: 'the id is incorrect, please check the id',
-      };
+      const executeFn = GetTaskByIdUseCase.execute(Props);
 
-      expect(() => GetTaskByIdUseCase.execute(Props)).toThrowError(
-        exceptionObject.name,
-      );
+      await expect(executeFn).rejects.toBeInstanceOf(IncorrectId);
     });
 
-    test('test when the id is equals to zero then must return a error', () => {
+    test('test when the id is equals to zero then must return a error', async () => {
       const Props: IDTO = {
-        id: 0,
+        id: 4,
         token:
           'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c',
       };
 
-      const exceptionObject: Exception = {
-        code: 500,
-        name: 'error in the server',
-        message: 'error with id',
-        stack: 'the id is incorrect, please check the id',
+      const executeFn = GetTaskByIdUseCase.execute(Props);
+
+      await expect(executeFn).rejects.toBeInstanceOf(TaskNotFound);
+    });
+
+    test('test when the task was found, when i give the correct id then return the task found', async () => {
+      const Props: IDTO = {
+        id: 1,
+        token:
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c',
       };
 
-      expect(() => GetTaskByIdUseCase.execute(Props)).toThrowError(
-        exceptionObject.name,
-      );
+      const executeFn = await GetTaskByIdUseCase.execute(Props);
+
+      expect(executeFn).toBeInstanceOf(TaskImplementation);
     });
   });
 });

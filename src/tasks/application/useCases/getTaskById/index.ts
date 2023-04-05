@@ -2,7 +2,7 @@ import { type UseCase } from 'common/UseCase';
 import { type ITask } from 'tasks/domain/interfaces';
 import { type IOneTask } from 'tasks/application/repositories/ITaskRepository';
 import { type IDTO } from './DTO';
-import { DontHasToken, IncorrectId } from '../../exceptions';
+import { DontHasToken, IncorrectId, TaskNotFound } from '../../exceptions';
 
 class GetTaskById implements UseCase<ITask, IDTO> {
   private readonly OneTask: IOneTask;
@@ -10,7 +10,7 @@ class GetTaskById implements UseCase<ITask, IDTO> {
     this.OneTask = OneTask;
   }
 
-  execute(props: IDTO): ITask {
+  async execute(props: IDTO): Promise<ITask> {
     if (props.token.length === 0) {
       throw new DontHasToken();
     }
@@ -18,7 +18,13 @@ class GetTaskById implements UseCase<ITask, IDTO> {
       throw new IncorrectId();
     }
 
-    const task = this.OneTask.withId(props.id);
+    const task = await this.OneTask.withId(props.id);
+
+    console.log(task);
+
+    if (task === null) {
+      throw new TaskNotFound();
+    }
 
     return task;
   }

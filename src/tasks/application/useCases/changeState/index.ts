@@ -18,22 +18,20 @@ class ChangeState implements UseCase<Messsage, DTO> {
     this.oneTask = oneTask;
   }
 
-  execute(props: DTO): Messsage | Messsage[] {
-    const task: ITask = this.oneTask.withId(props.id);
+  async execute(props: DTO): Promise<Messsage> {
+    const task: ITask | null = await this.oneTask.withId(props.id);
 
-    if (task == null) {
+    if (task === null) {
       throw new TaskNotFound();
     }
 
-    const dataChanged: ITask = this.editTask.withId(props.id, {
+    await this.editTask.withId(props.id, {
       isReady: props.isReady,
     });
 
-    const isUndefinedData = Object.values(dataChanged).some(
-      taskVal => taskVal === undefined,
-    );
+    const isChanged: ITask | null = await this.oneTask.withId(props.id);
 
-    if (isUndefinedData || dataChanged.isReady !== props.isReady) {
+    if (isChanged?.isReady !== props.isReady) {
       throw new CantUpdateData();
     }
 
