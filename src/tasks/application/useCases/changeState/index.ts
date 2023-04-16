@@ -1,11 +1,11 @@
-import { type UseCase } from 'common/UseCase';
-import { type Messsage } from 'common/Message';
+import { type UseCase } from 'common/application/interfaces/UseCase';
+import { type Messsage } from 'common/domain/interfaces/Message';
 import { type DTO } from './DTO';
 import {
   type IEditTask,
   type IOneTask,
 } from 'tasks/application/repositories/ITaskRepository';
-import { MessageImplementation } from 'common/implementations';
+import { MessageImplementation } from 'common/domain/implementations';
 import { TaskNotFound, CantUpdateData } from 'tasks/application/exceptions';
 import { type ITask } from 'tasks/domain';
 

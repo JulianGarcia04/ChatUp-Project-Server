@@ -1,4 +1,4 @@
-import { type IisDelete } from 'common/IisDelete';
+import { type IisDelete } from 'common/domain/interfaces/IisDelete';
 
 export interface ITask extends IisDelete {
   readonly id: string | number;

@@ -6,7 +6,7 @@ import {
   type IEditTask,
 } from 'tasks/application/repositories/ITaskRepository';
 import { TaskNotFound, CantDeleteTask } from '../application/exceptions';
-import { MessageImplementation } from 'common/implementations';
+import { MessageImplementation } from 'common/domain/implementations';
 import { DeleteTask } from 'tasks/application/useCases';
 import { type toDomain } from 'common';
 import { type ITask } from 'tasks/domain';

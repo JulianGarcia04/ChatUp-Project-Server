@@ -8,17 +8,17 @@
     "prettier",
     "plugin:prettier/recommended"
   ],
-  "plugins": ["prettier", "hexagonal-architecture"],
+  "plugins": ["prettier", "jest"],
   "overrides": [
     {
-      "files": ["contexts/{backend}/*/src/**/*.ts"],
+      "files": ["./src/**/tests/*.test.ts", "./src/**/tests/**/*.ts"],
       "rules": {
-        "hexagonal-architecture/enforce": ["error"]
+        "no-eval": "off"
       }
     }
   ],
   "parserOptions": {
-    "project": ["./backend/tsconfig.json"],
+    "project": ["**/tsconfig.json"],
     "ecmaVersion": "latest",
     "sourceType": "module"
   },

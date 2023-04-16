@@ -7,7 +7,7 @@ import {
 } from 'tasks/application/repositories/ITaskRepository';
 import { CreateTask } from 'tasks/application/useCases';
 import { CantBeSaved, TaskIsDuplicate } from 'tasks/application/exceptions';
-import { MessageImplementation } from 'common/implementations';
+import { MessageImplementation } from 'common/domain/implementations';
 import { type toDomain } from 'common';
 import { type ITask } from 'tasks/domain';
 

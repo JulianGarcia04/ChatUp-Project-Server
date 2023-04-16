@@ -7,7 +7,7 @@ import { type ITask } from 'tasks/domain';
 import { ChangeState } from 'tasks/application/useCases';
 import { type DTO } from 'tasks/application/useCases/changeState/DTO';
 import { type toDomain } from 'common';
-import { MessageImplementation } from 'common/implementations';
+import { MessageImplementation } from 'common/domain/implementations';
 import { TaskNotFound } from '../application/exceptions';
 import { MockClass } from 'common/mocks';
 import { RepositorysMockFns, mapperToDomain } from './mocks';

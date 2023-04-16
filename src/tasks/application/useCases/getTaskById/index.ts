@@ -1,4 +1,4 @@
-import { type UseCase } from 'common/UseCase';
+import { type UseCase } from 'common/application/interfaces/UseCase';
 import { type ITask } from 'tasks/domain/interfaces';
 import { type IOneTask } from 'tasks/application/repositories/ITaskRepository';
 import { type IDTO } from './DTO';

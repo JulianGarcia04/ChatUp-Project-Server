@@ -1,7 +1,7 @@
-import { type UseCase } from 'common/UseCase';
+import { type UseCase } from 'common/application/interfaces/UseCase';
 import { type DTO } from './DTO';
-import { type Messsage } from 'common/Message';
-import { MessageImplementation } from 'common/implementations';
+import { type Messsage } from 'common/domain/interfaces/Message';
+import { MessageImplementation } from 'common/domain/implementations';
 import { type IEditTask, type IOneTask } from 'tasks/application';
 import { TaskNotFound, CantDeleteTask } from 'tasks/application/exceptions';
 

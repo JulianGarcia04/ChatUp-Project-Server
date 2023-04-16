@@ -1,4 +1,9 @@
-import { type UseCase } from 'common/UseCase';
+import {
+  LimitMustBeGreatThanToZero,
+  SkipMustBeGreatEqualThanToZero,
+  CantFoundTasks,
+} from 'tasks/application/exceptions';
+import { type UseCase } from 'common/application/interfaces/UseCase';
 import { type IAllTask } from 'tasks/application';
 import { type ITask } from 'tasks/domain';
 import { type DTO } from './DTO';
@@ -10,11 +15,24 @@ class GetAllTask implements UseCase<ITask, DTO> {
   }
 
   async execute(props: DTO): Promise<ITask[]> {
+    if (props.limit <= 0) {
+      throw new LimitMustBeGreatThanToZero();
+    }
+
+    if (props.skip < 0) {
+      throw new SkipMustBeGreatEqualThanToZero();
+    }
+
     const allTaskData = await this.allTask.withPaginate(
-      props.filter,
       props.skip,
       props.limit,
+      props.filter,
     );
+
+    if (allTaskData.length === 0) {
+      throw new CantFoundTasks();
+    }
+
     return allTaskData;
   }
 }

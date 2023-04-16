@@ -1,4 +1,4 @@
-import { ExceptionImplementation } from 'common/implementations';
+import { ExceptionImplementation } from 'common/domain/implementations';
 
 class TaskNotFound extends ExceptionImplementation {
   constructor() {

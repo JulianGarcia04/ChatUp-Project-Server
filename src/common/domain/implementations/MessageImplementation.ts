@@ -1,4 +1,4 @@
-import { type Messsage } from '../Message';
+import { type Messsage } from '../interfaces/Message';
 
 class MessageImplementation implements Messsage {
   private readonly props: Messsage;

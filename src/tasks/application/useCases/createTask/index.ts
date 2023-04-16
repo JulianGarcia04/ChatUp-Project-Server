@@ -1,4 +1,4 @@
-import { type UseCase } from 'common/UseCase';
+import { type UseCase } from 'common/application/interfaces/UseCase';
 import { type createTaskDTO } from './DTO';
 import { type ITask, TaskImplementation } from 'tasks/domain';
 import {
@@ -10,7 +10,7 @@ import {
   CantCreatedDomainObject,
   CantBeSaved,
 } from '../../exceptions';
-import { MessageImplementation } from 'common/implementations';
+import { MessageImplementation } from 'common/domain/implementations';
 
 class CreateTask implements UseCase<MessageImplementation, createTaskDTO> {
   private readonly OneTask: IOneTask;

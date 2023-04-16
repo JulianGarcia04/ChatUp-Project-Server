@@ -1,4 +1,10 @@
-export { ChangeState, CreateTask, DeleteTask, GetTaskById } from './useCases';
+export {
+  ChangeState,
+  CreateTask,
+  DeleteTask,
+  GetTaskById,
+  GetAllTask,
+} from './useCases';
 export {
   type IOneTask,
   type IAllTask,

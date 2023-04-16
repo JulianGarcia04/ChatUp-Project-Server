@@ -1,11 +1,11 @@
 export interface IAllRepository<TDomain> {
   withPaginate(
-    filter: unknown,
     skip: number,
     limit: number,
+    filter?: unknown,
   ): Promise<TDomain[]>;
 
-  withoutPaginate(filter: unknown): Promise<TDomain[] | []>;
+  withoutPaginate(filter?: unknown): Promise<TDomain[] | []>;
 }
 
 export interface IOneRepository<TDomain> {

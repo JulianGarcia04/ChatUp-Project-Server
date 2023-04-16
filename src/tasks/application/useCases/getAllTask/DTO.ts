@@ -1,5 +1,5 @@
 export interface DTO {
-  filter: unknown;
+  filter?: unknown;
   limit: number;
   skip: number;
 }
