@@ -14,3 +14,9 @@ export {
   type IOneRepository,
   type UseCase,
 } from './application';
+
+export {
+  type ORM,
+  MongodbConnection,
+  DBImplementation,
+} from './infrastructure';
