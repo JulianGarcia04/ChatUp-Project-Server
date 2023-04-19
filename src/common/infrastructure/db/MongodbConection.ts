@@ -1,7 +1,9 @@
-import { DBImplementation } from '../utils';
+import { mongodb, type MongodbImplementation } from '../utils';
 import config from 'src/config';
 
-class MongodbConnection extends DBImplementation {
+class MongodbConnection {
+  private readonly dbImplementation: MongodbImplementation = mongodb;
+
   async connect(): Promise<void> {
     const dbURI: string | undefined =
       config.ENVIROMENT === 'production'
@@ -15,7 +17,7 @@ class MongodbConnection extends DBImplementation {
         cause: 'dont has the db url, check the enviroment variables',
       });
     }
-    await this.orm.connect(dbURI);
+    await this.dbImplementation.orm.connect(dbURI);
   }
 }
 

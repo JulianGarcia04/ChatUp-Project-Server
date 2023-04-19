@@ -1,1 +1,2 @@
-export { default as DBImplementation } from './DBImplementation';
+export { default as mongodb } from './MongodbImplementation';
+export { MongodbImplementation } from './MongodbImplementation';

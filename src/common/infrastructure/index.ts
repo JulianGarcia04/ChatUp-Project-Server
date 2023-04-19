@@ -1,3 +1,3 @@
 export { type ORM } from './interfaces';
-export { DBImplementation } from './utils';
+export { MongodbImplementation, mongodb } from './utils';
 export { MongodbConnection } from './db';

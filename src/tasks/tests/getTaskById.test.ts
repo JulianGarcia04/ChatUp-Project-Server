@@ -37,6 +37,7 @@ beforeEach(() => {
     description: 'mi primer hola mundo',
     isReady: false,
     isDelete: false,
+    createdDate: new Date(Date.now()),
   });
 });
 

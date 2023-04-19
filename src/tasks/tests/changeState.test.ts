@@ -13,12 +13,13 @@ import { MockClass } from 'common/mocks';
 import { RepositorysMockFns, mapperToDomain } from './mocks';
 
 // const data
-const task = {
+const task: ITask = {
   id: 1,
   title: 'Prueba',
   description: 'La descripción de la prueba',
   isReady: false,
   isDelete: false,
+  createdDate: new Date(Date.now()),
 };
 
 // mapper mock class

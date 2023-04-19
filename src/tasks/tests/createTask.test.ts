@@ -10,6 +10,7 @@ import { CantBeSaved, TaskIsDuplicate } from 'tasks/application/exceptions';
 import { MessageImplementation } from 'common/domain/implementations';
 import { type toDomain } from 'common';
 import { type ITask } from 'tasks/domain';
+import { type createTaskDTO } from 'tasks/application/useCases/createTask/DTO';
 
 // mapper mock class
 const ToDomain = MockClass(
@@ -31,6 +32,7 @@ beforeEach(() => {
     description: 'mi primer hola mundo',
     isReady: false,
     isDelete: false,
+    createdDate: new Date(Date.now()),
   });
 });
 
@@ -58,14 +60,14 @@ describe('tests create task usecase', () => {
   const createTask = new CreateTaskMock() as ICreateTask;
   const createTaskFaile = new CreateTaskMockFaile() as ICreateTask;
   const oneTask = new OneTaskMock() as IOneTask;
+
   test('test when the task is on the database, where I give the function to the repeat params then must return a error', async () => {
     const createTaskUseCase = new CreateTask(createTask, oneTask);
-    const props: ITask = {
+    const props: createTaskDTO = {
       id: 1,
       title: 'Hola mundo',
       description: 'mi primer hola mundo',
       isReady: false,
-      isDelete: false,
     };
 
     const executeFn = createTaskUseCase.execute(props);
@@ -74,12 +76,11 @@ describe('tests create task usecase', () => {
 
   test('test check that the object be saved in the database correctly, where I give the faile mock function then return error', async () => {
     const createTaskUseCase = new CreateTask(createTaskFaile, oneTask);
-    const props = {
+    const props: createTaskDTO = {
       id: 3,
       title: 'mi tercero hola mundo',
       description: 'saludo tres veces',
       isReady: false,
-      isDelete: false,
     };
 
     const executeFn = createTaskUseCase.execute(props);
@@ -89,12 +90,11 @@ describe('tests create task usecase', () => {
 
   test('test when finished the usecase must return a message', async () => {
     const createTaskUseCase = new CreateTask(createTask, oneTask);
-    const props = {
+    const props: createTaskDTO = {
       id: 3,
       title: 'mi tercero hola mundo',
       description: 'saludo tres veces',
       isReady: false,
-      isDelete: false,
     };
 
     const executeFn = await createTaskUseCase.execute(props);

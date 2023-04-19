@@ -1,45 +1,52 @@
 import { type ITask } from '../interfaces';
 
-class Task implements ITask {
-  private readonly _id: string | number;
-  private readonly _title: string;
-  private readonly _description: string;
-  private readonly _isReady: boolean;
-  private readonly _isDelete: boolean;
+class Entity<T> {
+  protected readonly props: T;
 
-  private constructor({ id, title, description, isReady, isDelete }: ITask) {
-    this._id = id;
-    this._title = title;
-    this._description = description;
-    this._isReady = isReady;
-    this._isDelete = isDelete;
+  protected constructor(props: T) {
+    this.props = props;
+  }
+}
+
+class Task extends Entity<ITask> implements ITask {
+  private constructor({
+    id,
+    title,
+    description,
+    isReady,
+    isDelete,
+    createdDate,
+  }: ITask) {
+    super({ id, title, description, isReady, isDelete, createdDate });
   }
 
   // Getters
   public get id(): string | number {
-    return this._id;
+    return this.props.id;
   }
 
   public get title(): string {
-    return this._title;
+    return this.props.title;
   }
 
   public get description(): string {
-    return this._description;
+    return this.props.description;
   }
 
   public get isReady(): boolean {
-    return this._isReady;
+    return this.props.isReady;
   }
 
   public get isDelete(): boolean {
-    return this._isDelete;
+    return this.props.isDelete;
+  }
+
+  public get createdDate(): Date {
+    return this.props.createdDate;
   }
 
   public static create(props: ITask): ITask {
-    const task = new Task(props);
-
-    return task;
+    return new Task(props);
   }
 }
 

@@ -15,6 +15,7 @@ const DATA = [
     description: 'mi primer hola mundo',
     isReady: false,
     isDelete: false,
+    createdDate: new Date(Date.now()),
   },
   {
     id: 2,
@@ -22,6 +23,7 @@ const DATA = [
     description: 'mi segundo hola mundo',
     isReady: false,
     isDelete: false,
+    createdDate: new Date(Date.now()),
   },
   {
     id: 3,
@@ -29,6 +31,7 @@ const DATA = [
     description: 'mi tercer hola mundo',
     isReady: false,
     isDelete: false,
+    createdDate: new Date(2022, 11, 12),
   },
   {
     id: 4,
@@ -36,6 +39,7 @@ const DATA = [
     description: 'mi cuarto hola mundo',
     isReady: false,
     isDelete: false,
+    createdDate: new Date(Date.now()),
   },
   {
     id: 5,
@@ -43,6 +47,7 @@ const DATA = [
     description: 'mi quinto hola mundo',
     isReady: false,
     isDelete: false,
+    createdDate: new Date(Date.now()),
   },
   {
     id: 6,
@@ -50,6 +55,7 @@ const DATA = [
     description: 'mi sexto hola mundo',
     isReady: false,
     isDelete: false,
+    createdDate: new Date(2023, 3, 22),
   },
 ];
 

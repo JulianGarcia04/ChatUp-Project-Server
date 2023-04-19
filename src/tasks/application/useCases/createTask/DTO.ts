@@ -1,3 +1,6 @@
-import { type ITask } from 'tasks/domain';
-
-export interface createTaskDTO extends ITask {}
+export interface createTaskDTO {
+  id: string | number;
+  title: string;
+  description: string;
+  isReady: boolean;
+}

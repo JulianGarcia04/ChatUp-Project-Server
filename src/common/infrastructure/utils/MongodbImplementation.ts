@@ -1,7 +1,7 @@
 import { type ORM } from '../interfaces';
 import { Mongoose } from 'mongoose';
 
-class DBImplementation implements ORM<Mongoose> {
+export class MongodbImplementation implements ORM<Mongoose> {
   private readonly _orm: Mongoose = new Mongoose();
 
   get orm(): Mongoose {
@@ -9,4 +9,4 @@ class DBImplementation implements ORM<Mongoose> {
   }
 }
 
-export default DBImplementation;
+export default new MongodbImplementation();

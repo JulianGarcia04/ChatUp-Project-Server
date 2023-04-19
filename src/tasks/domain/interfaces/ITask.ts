@@ -1,6 +1,6 @@
-import { type IisDelete } from 'common/domain/interfaces/IisDelete';
+import { type IisDelete, type createdDate } from 'common/domain';
 
-export interface ITask extends IisDelete {
+export interface ITask extends IisDelete, createdDate {
   readonly id: string | number;
   readonly title: string;
   readonly description: string;

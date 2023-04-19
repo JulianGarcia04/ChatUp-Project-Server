@@ -18,5 +18,6 @@ export {
 export {
   type ORM,
   MongodbConnection,
-  DBImplementation,
+  MongodbImplementation,
+  mongodb,
 } from './infrastructure';
