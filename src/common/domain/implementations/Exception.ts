@@ -1,6 +1,6 @@
 import { type Exception } from '../interfaces';
 
-class ExceptionImplementation extends Error implements Exception {
+abstract class ExceptionImplementation extends Error implements Exception {
   protected props: Exception;
 
   constructor(props: Exception) {

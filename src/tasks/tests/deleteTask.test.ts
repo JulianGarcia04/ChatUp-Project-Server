@@ -8,7 +8,7 @@ import {
 import { TaskNotFound, CantDeleteTask } from '../application/exceptions';
 import { MessageImplementation } from 'common/domain/implementations';
 import { DeleteTask } from 'tasks/application/useCases';
-import { type toDomain } from 'common';
+import { type toModel } from 'common';
 import { type ITask } from 'tasks/domain';
 import { type DTO } from 'tasks/application/useCases/deleteTask/DTO';
 
@@ -18,7 +18,7 @@ const ToDomain = MockClass(
   [(task: ITask) => mapperToDomain(task)],
 );
 
-const toDomainImplementation = new ToDomain() as toDomain<ITask>;
+const toDomainImplementation = new ToDomain() as toModel<ITask>;
 
 // repositoryFns
 const repositoryMock = new RepositorysMockFns(toDomainImplementation);

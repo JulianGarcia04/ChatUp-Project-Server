@@ -8,7 +8,7 @@ import {
   IncorrectId,
 } from '../application/exceptions';
 import { type IOneTask } from 'tasks/application/repositories/ITaskRepository';
-import { type toDomain } from 'common';
+import { type toModel } from 'common';
 import { type IDTO } from 'tasks/application/useCases/getTaskById/DTO';
 import { type ITask, TaskImplementation } from 'tasks/domain';
 
@@ -18,7 +18,7 @@ const ToDomain = MockClass(
   [(task: ITask) => mapperToDomain(task)],
 );
 
-const toDomainImplementation = new ToDomain() as toDomain<ITask>;
+const toDomainImplementation = new ToDomain() as toModel<ITask>;
 
 // repositoryFns
 const repositoryMock = new RepositorysMockFns(toDomainImplementation);

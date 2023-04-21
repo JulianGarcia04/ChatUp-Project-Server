@@ -11,8 +11,10 @@ class CreatedDate implements createdDate {
     return this._createdDate;
   }
 
-  static create(): createdDate {
-    const createdDate = new CreatedDate({ createdDate: new Date(Date.now()) });
+  static create(date?: Date): createdDate {
+    const createdDate = new CreatedDate({
+      createdDate: date ?? new Date(Date.now()),
+    });
     return createdDate;
   }
 }

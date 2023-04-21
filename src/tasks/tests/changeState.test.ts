@@ -6,7 +6,7 @@ import {
 import { type ITask } from 'tasks/domain';
 import { ChangeState } from 'tasks/application/useCases';
 import { type DTO } from 'tasks/application/useCases/changeState/DTO';
-import { type toDomain } from 'common';
+import { type toModel } from 'common';
 import { MessageImplementation } from 'common/domain/implementations';
 import { TaskNotFound } from '../application/exceptions';
 import { MockClass } from 'common/mocks';
@@ -28,7 +28,7 @@ const ToDomain = MockClass(
   [(task: ITask) => mapperToDomain(task)],
 );
 
-const toDomainImplementation = new ToDomain() as toDomain<ITask>;
+const toDomainImplementation = new ToDomain() as toModel<ITask>;
 
 // class where contain the functions repositories
 const repositoryMock = new RepositorysMockFns(toDomainImplementation);

@@ -1,4 +1,3 @@
-export { type toDomain } from './Models';
 export {
   ExceptionImplementation,
   MessageImplementation,
@@ -17,6 +16,7 @@ export {
 
 export {
   type ORM,
+  type toModel,
   MongodbConnection,
   MongodbImplementation,
   mongodb,

@@ -6,7 +6,7 @@ import { ExceptionImplementation } from 'common/domain/implementations';
 import { type IAllTask } from '../application/repositories/ITaskRepository';
 import { type DTO } from '../application/useCases/getAllTask/DTO';
 import { type ITask } from 'tasks/domain';
-import { type toDomain } from 'common';
+import { type toModel } from 'common';
 
 const DATA = [
   {
@@ -65,7 +65,7 @@ const ToDomain = MockClass(
   [(task: ITask) => mapperToDomain(task)],
 );
 
-const toDomainImplementation = new ToDomain() as toDomain<ITask>;
+const toDomainImplementation = new ToDomain() as toModel<ITask>;
 
 // repositoryFns
 const repositoryMock = new RepositorysMockFns(toDomainImplementation);

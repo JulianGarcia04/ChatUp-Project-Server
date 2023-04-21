@@ -1,4 +1,5 @@
 import express, { type Express } from 'express';
+import morgan from 'morgan';
 import config from './config';
 import { CreateTask } from 'tasks/application';
 import { v4 } from 'uuid';
@@ -10,6 +11,7 @@ abstract class Config {
   constructor() {
     this._app.set('PORT', config.PORT);
     this._app.use(express.json());
+    this._app.use(morgan('dev'));
     this._app.post('/', (req, res) => {
       const { title, description, isReady } = req.body;
       new CreateTask(createTask, oneTask)
@@ -20,13 +22,15 @@ abstract class Config {
           isReady,
         })
         .then(message => {
-          res.json(message);
+          res.status(message.code).json({ message: message.message });
         })
         .catch(e => {
           if (e instanceof ExceptionImplementation) {
-            res.status(500).json(e);
+            console.log({ message: e.message, stack: e.stack });
+            res.status(e.code).json({ message: e.name });
           } else {
             console.log(e);
+            res.status(500).json({ message: 'Error server' });
           }
         });
     });

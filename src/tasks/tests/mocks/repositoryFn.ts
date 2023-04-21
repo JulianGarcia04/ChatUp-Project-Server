@@ -1,11 +1,11 @@
 import { type ITask } from 'tasks/domain';
-import { type toDomain } from 'common';
+import { type toModel } from 'common';
 
 class RepositorysMockFns {
   public tasks: ITask[] = [];
-  private readonly toDomainImplementation: toDomain<ITask>;
+  private readonly toDomainImplementation: toModel<ITask>;
 
-  constructor(modelToDomain: toDomain<ITask>) {
+  constructor(modelToDomain: toModel<ITask>) {
     this.toDomainImplementation = modelToDomain;
   }
 
