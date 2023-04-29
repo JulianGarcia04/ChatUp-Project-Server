@@ -10,9 +10,13 @@ class RepositorysMockFns {
   }
 
   // mock get all task
-  async findAll(filter?: unknown): Promise<ITask[]> {
-    if (filter == null) {
+  async findAll(filter?: unknown, search?: string): Promise<ITask[]> {
+    console.log('this is a filter', filter);
+    console.log('this is a search prop', search);
+    if (filter == null && search == null) {
       return this.tasks;
+    } else if (filter == null && search != null) {
+      return this.tasks.filter(taks => taks.title.includes(search));
     }
     // convert type array
     const filters = filter as any[];
@@ -35,7 +39,9 @@ class RepositorysMockFns {
       condition = `${condition} ${key}${logicOperator}${value} ${and}`;
     });
     return this.tasks.filter(task => {
-      return eval(condition.trim());
+      return search == null
+        ? eval(condition.trim())
+        : eval(`${condition} && ${String(task.title.includes(search))}`.trim());
     });
   }
 
@@ -43,13 +49,18 @@ class RepositorysMockFns {
     skip: number,
     limit: number,
     filter?: unknown,
+    search?: string,
   ): Promise<ITask[]> {
-    if (filter == null) {
+    if (filter == null && search == null) {
       const skippedArr = this.tasks.slice(skip, skip + limit);
       return skippedArr;
     }
+    if (filter == null && search != null) {
+      const filterArr = this.tasks.filter(task => task.title.includes(search));
+      return filterArr.slice(skip, skip + limit);
+    }
 
-    const dataFiltered = await this.findAll(filter);
+    const dataFiltered = await this.findAll(filter, search);
 
     const skippedArr = dataFiltered.slice(skip, skip + limit);
     return skippedArr;

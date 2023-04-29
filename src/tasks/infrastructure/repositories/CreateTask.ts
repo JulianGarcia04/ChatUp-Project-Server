@@ -9,4 +9,4 @@ class CreateTask implements ICreateTask {
   }
 }
 
-export default new CreateTask();
+export default CreateTask;

@@ -15,19 +15,23 @@ class GetAllTask implements UseCase<ITask, DTO> {
   }
 
   async execute(props: DTO): Promise<ITask[]> {
-    if (props.limit <= 0) {
+    if (props.limit != null && props.limit <= 0) {
       throw new LimitMustBeGreatThanToZero();
     }
 
-    if (props.skip < 0) {
+    if (props.skip != null && props.skip < 0) {
       throw new SkipMustBeGreatEqualThanToZero();
     }
 
-    const allTaskData = await this.allTask.withPaginate(
-      props.skip,
-      props.limit,
-      props.filter,
-    );
+    const allTaskData =
+      props.skip != null && props.limit != null
+        ? await this.allTask.withPaginate(
+            props.skip,
+            props.limit,
+            props?.filter,
+            props?.search,
+          )
+        : await this.allTask.withoutPaginate(props?.filter, props?.search);
 
     if (allTaskData.length === 0) {
       throw new CantFoundTasks();

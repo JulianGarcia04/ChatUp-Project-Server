@@ -1,3 +1,12 @@
-export { type ORM, type toModel } from './interfaces';
-export { MongodbImplementation, mongodb } from './utils';
+export { type ORM, type toModel, type IController } from './interfaces';
+export {
+  MongodbImplementation,
+  mongodb,
+  logicalOperators,
+  queryOperators,
+  parserFilters,
+  parserQueryUrl,
+  parserString,
+} from './utils';
 export { MongodbConnection } from './db';
+export { ToJSONException, ToJSONMessage, ToDomainException } from './models';

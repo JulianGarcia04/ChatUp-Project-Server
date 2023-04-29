@@ -1,11 +1,16 @@
 import { type Exception } from '../interfaces';
 
-abstract class ExceptionImplementation extends Error implements Exception {
+class ExceptionImplementation extends Error implements Exception {
   protected props: Exception;
 
   constructor(props: Exception) {
     super(props.name);
-    this.props = props;
+    this.props = {
+      code: props.code ?? 500,
+      name: props.name,
+      message: props.message,
+      stack: props.stack,
+    };
   }
 
   public get code(): number {

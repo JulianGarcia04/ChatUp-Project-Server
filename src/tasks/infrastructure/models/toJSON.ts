@@ -1,5 +1,5 @@
 import { type toModel } from 'common';
-import { type ITask } from 'src/tasks/domain';
+import { type ITask } from 'tasks/domain';
 
 class ToJSONTask implements toModel<ITask> {
   execute({
@@ -21,4 +21,4 @@ class ToJSONTask implements toModel<ITask> {
   }
 }
 
-export default new ToJSONTask();
+export default ToJSONTask;

@@ -78,9 +78,10 @@ beforeEach(() => {
 const FindAllMock = MockClass(
   ['withPaginate', 'withoutPaginate'],
   [
-    async (skip: number, limit: number, filter?: unknown) =>
-      await repositoryMock.findAllPaginate(skip, limit, filter),
-    async (filter?: unknown) => await repositoryMock.findAll(filter),
+    async (skip: number, limit: number, filter?: unknown, search?: string) =>
+      await repositoryMock.findAllPaginate(skip, limit, filter, search),
+    async (filter?: unknown, search?: string) =>
+      await repositoryMock.findAll(filter, search),
   ],
 );
 
@@ -113,6 +114,14 @@ describe('get all tasks with pagination use case', () => {
     await expect(executeFn).rejects.toBeInstanceOf(ExceptionImplementation);
   });
 
+  test('test return data, where the limit prop and skip prop is undefined, then must return all tasks', async () => {
+    const getAllTaskUseCase = new GetAllTask(allTask);
+
+    const executeFn = await getAllTaskUseCase.execute({});
+
+    expect(executeFn).toHaveLength(6);
+  });
+
   test('test return data, where the limit prop is five and skip is 0 and must return the array object', async () => {
     const getAllTaskUseCase = new GetAllTask(allTask);
     const props: DTO = { limit: 5, skip: 0 };
@@ -120,5 +129,24 @@ describe('get all tasks with pagination use case', () => {
     const executeFn = await getAllTaskUseCase.execute(props);
 
     expect(executeFn).toHaveLength(5);
+  });
+
+  test('test return data, where the limit prop is five and skip is zero and search prop is a string must return the tasks that is equal to search', async () => {
+    const getAllTaskUseCase = new GetAllTask(allTask);
+    const props: DTO = { limit: 5, skip: 0, search: '6' };
+
+    const executeFn = await getAllTaskUseCase.execute(props);
+
+    const toContain = {
+      id: 6,
+      title: 'Hola mundo 6',
+      description: 'mi sexto hola mundo',
+      isReady: false,
+      isDelete: false,
+      createdDate: new Date(2023, 3, 22),
+    };
+
+    expect(executeFn).toHaveLength(1);
+    expect(executeFn).toContainEqual(toContain);
   });
 });

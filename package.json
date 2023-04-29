@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "docker compose rm & docker compose -f docker-compose-dev.yml up & NODE_ENV=development nodemon src/index.ts",
     "build": "tsc",
-    "start": "docker compose rm & docker compose -f docker-compose.yml up & npm run build & NODE_ENV=production node dist/index.js",
+    "start": "docker compose rm & docker compose -f docker-compose.yml up & npm run build && NODE_ENV=production node dist/index.js",
     "test": "docker compose rm & docker compose -f docker-compose-testing.yml up & NODE_ENV=test jest --watch --silent",
     "lint": "eslint src/",
     "lint-fix": "eslint src/ --fix",
@@ -16,7 +16,6 @@
   "author": "Julian Garcia <jcgrrincon@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "awilix": "^8.0.0",
     "bcrypt": "^5.1.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",

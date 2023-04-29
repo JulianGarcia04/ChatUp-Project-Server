@@ -28,4 +28,6 @@ const Task = new mongodb.orm.Schema<ITask>({
   },
 });
 
+Task.index({ title: 'text', description: 'text' });
+
 export default mongodb.orm.model('task', Task);

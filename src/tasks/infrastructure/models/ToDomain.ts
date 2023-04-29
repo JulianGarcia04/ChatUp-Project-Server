@@ -11,4 +11,4 @@ class ToDomainTask implements toModel<ITask> {
   }
 }
 
-export default new ToDomainTask();
+export default ToDomainTask;

@@ -1,5 +1,6 @@
 export interface DTO {
   filter?: unknown;
-  limit: number;
-  skip: number;
+  search?: string;
+  limit?: number;
+  skip?: number;
 }

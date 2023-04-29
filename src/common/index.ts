@@ -17,7 +17,11 @@ export {
 export {
   type ORM,
   type toModel,
+  type IController,
   MongodbConnection,
   MongodbImplementation,
   mongodb,
+  ToJSONException,
+  ToJSONMessage,
+  ToDomainException,
 } from './infrastructure';
