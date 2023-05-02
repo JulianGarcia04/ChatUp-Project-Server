@@ -32,8 +32,15 @@ class Task implements ITask {
     return this.#props.createdDate;
   }
 
-  public static create(props: ITask): ITask {
-    return new Task(props);
+  public static create({
+    id,
+    title,
+    description,
+    isReady,
+    isDelete,
+    createdDate,
+  }: ITask): ITask {
+    return new Task({ id, title, description, isReady, isDelete, createdDate });
   }
 }
 

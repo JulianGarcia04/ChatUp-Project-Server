@@ -6,7 +6,7 @@ class TaskNotFound extends ExceptionImplementation {
       code: 404,
       name: 'Task no found',
       message: 'the id is incorrect',
-      stack: 'the id is incorrect, wasnt found the task',
+      cause: 'the id is incorrect, wasnt found the task',
     });
   }
 }

@@ -1,7 +1,8 @@
 import { type IAllTask } from 'tasks/application';
+import { parserFilters } from 'common/infrastructure';
+import { toDomainTask } from 'src/container';
 import { Task } from '../schemas';
 import { type ITask } from 'src/tasks/domain';
-import { parserFilters } from 'common/infrastructure';
 
 class AllTask implements IAllTask {
   async withPaginate(
@@ -24,13 +25,15 @@ class AllTask implements IAllTask {
     }
     if (filter == null) {
       tasks = await Task.find(baseQuery).skip(skip).limit(limit);
-      return tasks;
+      const tasksDomain = tasks.map(task => toDomainTask.execute(task));
+      return tasksDomain;
     }
     const filters = filter as any[];
     const objFilters = parserFilters(filters, baseQuery);
-    console.log(objFilters);
     tasks = await Task.find(objFilters).skip(skip).limit(limit);
-    return tasks;
+    const tasksDomain = tasks.map(task => toDomainTask.execute(task));
+    console.log(tasksDomain);
+    return tasksDomain;
   }
 
   async withoutPaginate(
@@ -50,8 +53,9 @@ class AllTask implements IAllTask {
       };
     }
     const objFilters = parserFilters(filters, baseQuery);
-    const task = await Task.find(objFilters);
-    return task;
+    const tasks = await Task.find(objFilters);
+    const tasksDomain = tasks.map(task => toDomainTask.execute(task));
+    return tasksDomain;
   }
 }
 

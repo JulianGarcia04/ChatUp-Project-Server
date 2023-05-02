@@ -1,28 +1,22 @@
 import { type Exception } from '../interfaces';
 
 class ExceptionImplementation extends Error implements Exception {
-  protected props: Exception;
+  private readonly _code: number;
 
   constructor(props: Exception) {
-    super(props.name);
-    this.props = {
-      code: props.code ?? 500,
-      name: props.name,
-      message: props.message,
-      stack: props.stack,
-    };
+    super(props.message);
+    this.name = props.name;
+    this._code = props.code ?? 500;
+    this.cause = props.cause;
+    if (props.stack != null) {
+      this.stack = props.stack;
+    } else {
+      Error.captureStackTrace(this, this.constructor);
+    }
   }
 
   public get code(): number {
-    return this.props.code;
-  }
-
-  public get message(): string {
-    return this.props.message;
-  }
-
-  public get stack(): string {
-    return this.props.stack;
+    return this._code;
   }
 }
 

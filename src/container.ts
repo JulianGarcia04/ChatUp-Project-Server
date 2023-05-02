@@ -1,12 +1,14 @@
-import { CreateTask, GetAllTask } from 'tasks/application';
+import { CreateTask, GetAllTask, DeleteTask } from 'tasks/application';
 import {
   OneTaskRepository,
   CreateTaskRepository,
   AllTasksRepository,
+  EditTaskRepository,
 } from 'tasks/infrastructure/repositories';
 import {
   CreateTaskController,
   FindTasksController,
+  DeleteTaskController,
 } from 'tasks/infrastructure/controllers';
 import { ToDomainTask, ToJSONTask } from 'tasks/infrastructure/models';
 import { ToDomainException, ToJSONException, ToJSONMessage } from 'common';
@@ -22,10 +24,12 @@ export const toJSONTask = new ToJSONTask();
 export const oneTaskRepository = new OneTaskRepository();
 export const createTaskRepository = new CreateTaskRepository();
 export const allTasksRepository = new AllTasksRepository();
+export const updateTaskRepository = new EditTaskRepository();
 
 // Controllers
 export const createTaskController = new CreateTaskController();
 export const findTasksController = new FindTasksController();
+export const deleteTaskController = new DeleteTaskController();
 
 // Use cases
 export const createTaskUseCase = new CreateTask(
@@ -34,3 +38,8 @@ export const createTaskUseCase = new CreateTask(
 );
 
 export const getAllTasksUseCase = new GetAllTask(allTasksRepository);
+
+export const deleteTaskUseCase = new DeleteTask(
+  oneTaskRepository,
+  updateTaskRepository,
+);

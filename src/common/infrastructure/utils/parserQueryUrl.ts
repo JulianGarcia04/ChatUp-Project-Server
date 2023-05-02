@@ -60,7 +60,10 @@ const parserQueryUrl = (str: string): any => {
 
   needFind.forEach(obj => {
     const idx = filters.findIndex(filter => filter[0] === obj.name);
-    obj.value = filters[idx][2];
+    if (idx === -1) {
+      return;
+    }
+    obj.value = filters[idx][2] ?? null;
     filters.splice(idx, 2);
   });
 

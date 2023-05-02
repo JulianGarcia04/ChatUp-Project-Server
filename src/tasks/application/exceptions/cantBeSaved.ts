@@ -6,7 +6,7 @@ class CantBeSaved extends ExceptionImplementation {
       code: 500,
       name: 'Error to save the task',
       message: 'Error when try to save the task in the database',
-      stack: 'please check the repository or check the database connection',
+      cause: 'please check the repository or check the database connection',
     });
   }
 }

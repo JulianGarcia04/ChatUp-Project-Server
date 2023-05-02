@@ -6,7 +6,7 @@ class CantDeleteTask extends ExceptionImplementation {
       code: 500,
       name: 'Cant delete task',
       message: 'Error in the repository',
-      stack: 'Please check the repository or database',
+      cause: 'Please check the repository or database',
     });
   }
 }

@@ -6,7 +6,7 @@ class CantUpdateData extends ExceptionImplementation {
       code: 500,
       name: 'State couldnt changed',
       message: 'Error in the repository',
-      stack: 'Please check the repository or database',
+      cause: 'Please check the repository or database',
     });
   }
 }

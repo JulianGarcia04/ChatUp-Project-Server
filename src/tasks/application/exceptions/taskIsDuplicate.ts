@@ -6,7 +6,7 @@ class TaskDuplicate extends ExceptionImplementation {
       code: 500,
       name: 'The task is duplicate',
       message: 'One task in the database is duplicate',
-      stack:
+      cause:
         'please check the id and change the same. please check the database',
     });
   }

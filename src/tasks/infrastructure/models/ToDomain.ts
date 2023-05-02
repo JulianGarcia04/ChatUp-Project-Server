@@ -4,10 +4,18 @@ import { IsDelete, CreatedDate } from 'common/domain';
 
 class ToDomainTask implements toModel<ITask> {
   execute(props: unknown): ITask {
-    const task = props as ITask;
-    const isDelete = IsDelete.create(task.isDelete).isDelete;
-    const createdDate = CreatedDate.create(task.createdDate).createdDate;
-    return TaskImplementation.create({ ...task, isDelete, createdDate });
+    const { id, title, description, isReady, isDelete, createdDate } =
+      props as ITask;
+    const isDeleteDomain = IsDelete.create(isDelete).isDelete;
+    const createdDateDomain = CreatedDate.create(createdDate).createdDate;
+    return TaskImplementation.create({
+      id,
+      title,
+      description,
+      isReady,
+      isDelete: isDeleteDomain,
+      createdDate: createdDateDomain,
+    });
   }
 }
 

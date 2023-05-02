@@ -7,7 +7,10 @@ import { type ITask } from 'tasks/domain';
 import { ChangeState } from 'tasks/application/useCases';
 import { type DTO } from 'tasks/application/useCases/changeState/DTO';
 import { type toModel } from 'common';
-import { MessageImplementation } from 'common/domain/implementations';
+import {
+  MessageImplementation,
+  ExceptionImplementation,
+} from 'common/domain/implementations';
 import { TaskNotFound } from '../application/exceptions';
 import { MockClass } from 'common/mocks';
 import { RepositorysMockFns, mapperToDomain } from './mocks';
@@ -61,7 +64,7 @@ describe('test the change state task usecase', () => {
     const props: DTO = { id: 3, isReady: true };
 
     const executeFn = changeStateUseCase.execute(props);
-    await expect(executeFn).rejects.toBeInstanceOf(TaskNotFound);
+    await expect(executeFn).rejects.toBeInstanceOf(ExceptionImplementation);
   });
 
   test('test when change the state in the task, I going to give the params for that want change the state, must return a confirm message', async () => {

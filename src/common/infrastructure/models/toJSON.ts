@@ -11,11 +11,12 @@ export class ToJSONMessage implements toModel<Messsage> {
 }
 
 export class ToJSONException implements toModel<Exception> {
-  execute({ code, name, message, stack }: Exception): Exception {
+  execute({ code, name, message, cause, stack }: Exception): Exception {
     return {
       code,
       name,
       message,
+      cause,
       stack,
     };
   }

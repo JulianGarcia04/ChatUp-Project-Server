@@ -6,7 +6,7 @@ class CantFoundTasks extends ExceptionImplementation {
       code: 404,
       name: 'Dont has tasks',
       message: 'Dont has tasks in the database',
-      stack:
+      cause:
         'Check the database if has data, or check the repository logic is correct',
     });
   }

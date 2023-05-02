@@ -16,7 +16,7 @@ class DeleteTask implements UseCase<Messsage, DTO> {
 
   async execute(props: DTO): Promise<Messsage> {
     const isExists = await this.oneTask.withId(props.id);
-    if (isExists === null) {
+    if (isExists == null) {
       throw new TaskNotFound();
     }
 
