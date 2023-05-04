@@ -1,10 +1,10 @@
 import { test, describe, expect, beforeEach } from '@jest/globals';
-import { RepositorysMockFns, mapperToDomain } from './mocks';
+import { RepositorysMockFns, mapperToDomain } from '../mocks';
 import { MockClass } from 'common/mocks';
-import { GetAllTask } from '../application';
+import { GetAllTask } from 'tasks/application';
 import { ExceptionImplementation } from 'common/domain/implementations';
-import { type IAllTask } from '../application/repositories/ITaskRepository';
-import { type DTO } from '../application/useCases/getAllTask/DTO';
+import { type IAllTask } from 'tasks/application/repositories/ITaskRepository';
+import { type DTO } from 'tasks/application/useCases/getAllTask/DTO';
 import { type ITask } from 'tasks/domain';
 import { type toModel } from 'common';
 
@@ -65,7 +65,7 @@ const ToDomain = MockClass(
   [(task: ITask) => mapperToDomain(task)],
 );
 
-const toDomainImplementation = new ToDomain() as toModel<ITask>;
+const toDomainImplementation = new ToDomain() as toModel<ITask, ITask>;
 
 // repositoryFns
 const repositoryMock = new RepositorysMockFns(toDomainImplementation);

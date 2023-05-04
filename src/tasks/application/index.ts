@@ -1,9 +1,9 @@
 export {
-  ChangeState,
   CreateTask,
   DeleteTask,
   GetTaskById,
   GetAllTask,
+  ChangeBodyTask,
 } from './useCases';
 export {
   type IOneTask,

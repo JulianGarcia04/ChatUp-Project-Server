@@ -1,7 +1,7 @@
 import { type toModel } from 'common';
 import { type Messsage, type Exception } from 'common/domain';
 
-export class ToJSONMessage implements toModel<Messsage> {
+export class ToJSONMessage implements toModel<Messsage, Messsage> {
   execute({ code, message }: Messsage): Messsage {
     return {
       code,
@@ -10,7 +10,7 @@ export class ToJSONMessage implements toModel<Messsage> {
   }
 }
 
-export class ToJSONException implements toModel<Exception> {
+export class ToJSONException implements toModel<Exception, Exception> {
   execute({ code, name, message, cause, stack }: Exception): Exception {
     return {
       code,

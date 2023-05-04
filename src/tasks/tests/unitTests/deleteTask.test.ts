@@ -1,11 +1,11 @@
 import { describe, expect, test, beforeEach } from '@jest/globals';
-import { RepositorysMockFns, mapperToDomain } from './mocks';
+import { RepositorysMockFns, mapperToDomain } from '../mocks';
 import { MockClass } from 'common/mocks';
 import {
   type IOneTask,
   type IEditTask,
 } from 'tasks/application/repositories/ITaskRepository';
-import { TaskNotFound, CantDeleteTask } from '../application/exceptions';
+import { TaskNotFound, CantDeleteTask } from 'tasks/application/exceptions';
 import { MessageImplementation } from 'common/domain/implementations';
 import { DeleteTask } from 'tasks/application/useCases';
 import { type toModel } from 'common';
@@ -18,7 +18,7 @@ const ToDomain = MockClass(
   [(task: ITask) => mapperToDomain(task)],
 );
 
-const toDomainImplementation = new ToDomain() as toModel<ITask>;
+const toDomainImplementation = new ToDomain() as toModel<ITask, ITask>;
 
 // repositoryFns
 const repositoryMock = new RepositorysMockFns(toDomainImplementation);

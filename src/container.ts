@@ -1,4 +1,10 @@
-import { CreateTask, GetAllTask, DeleteTask } from 'tasks/application';
+import {
+  CreateTask,
+  GetAllTask,
+  DeleteTask,
+  ChangeBodyTask,
+  GetTaskById,
+} from 'tasks/application';
 import {
   OneTaskRepository,
   CreateTaskRepository,
@@ -9,6 +15,8 @@ import {
   CreateTaskController,
   FindTasksController,
   DeleteTaskController,
+  UpdateTaskController,
+  FindTaskController,
 } from 'tasks/infrastructure/controllers';
 import { ToDomainTask, ToJSONTask } from 'tasks/infrastructure/models';
 import { ToDomainException, ToJSONException, ToJSONMessage } from 'common';
@@ -30,6 +38,8 @@ export const updateTaskRepository = new EditTaskRepository();
 export const createTaskController = new CreateTaskController();
 export const findTasksController = new FindTasksController();
 export const deleteTaskController = new DeleteTaskController();
+export const updateTaskController = new UpdateTaskController();
+export const findTaskController = new FindTaskController();
 
 // Use cases
 export const createTaskUseCase = new CreateTask(
@@ -43,3 +53,10 @@ export const deleteTaskUseCase = new DeleteTask(
   oneTaskRepository,
   updateTaskRepository,
 );
+
+export const updateTaskUseCase = new ChangeBodyTask(
+  updateTaskRepository,
+  oneTaskRepository,
+);
+
+export const findTaskUseCase = new GetTaskById(oneTaskRepository);

@@ -9,3 +9,4 @@ export { default as CantDeleteTask } from './cantDeleteTask';
 export { default as LimitMustBeGreatThanToZero } from './limitMustBeGreatThanToZero';
 export { default as SkipMustBeGreatEqualThanToZero } from './skipMustBeGreatEqualThanToZero';
 export { default as CantFoundTasks } from './cantFoundTasks';
+export { default as RequiredParams } from './requiredParams';

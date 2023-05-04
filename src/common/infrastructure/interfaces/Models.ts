@@ -1,3 +1,3 @@
-export interface toModel<TDomain> {
-  execute(props: unknown | TDomain): TDomain;
+export interface toModel<TDomainProp, TDomainJSON> {
+  execute(props: unknown | TDomainProp): TDomainJSON;
 }

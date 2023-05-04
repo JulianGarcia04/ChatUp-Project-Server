@@ -3,9 +3,9 @@ import { type toModel } from 'common';
 
 class RepositorysMockFns {
   public tasks: ITask[] = [];
-  private readonly toDomainImplementation: toModel<ITask>;
+  private readonly toDomainImplementation: toModel<ITask, ITask>;
 
-  constructor(modelToDomain: toModel<ITask>) {
+  constructor(modelToDomain: toModel<ITask, ITask>) {
     this.toDomainImplementation = modelToDomain;
   }
 

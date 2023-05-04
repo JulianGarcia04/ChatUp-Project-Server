@@ -2,7 +2,7 @@ import { type toModel } from 'common';
 import { type ITask, TaskImplementation } from 'src/tasks/domain';
 import { IsDelete, CreatedDate } from 'common/domain';
 
-class ToDomainTask implements toModel<ITask> {
+class ToDomainTask implements toModel<unknown, ITask> {
   execute(props: unknown): ITask {
     const { id, title, description, isReady, isDelete, createdDate } =
       props as ITask;
