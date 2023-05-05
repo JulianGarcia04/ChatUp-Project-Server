@@ -8,7 +8,7 @@ import {
 import { CreateTask } from 'tasks/application/useCases';
 import { CantBeSaved, TaskIsDuplicate } from 'tasks/application/exceptions';
 import { MessageImplementation } from 'common/domain/implementations';
-import { type toModel } from 'common';
+import { type toModel } from 'src/common';
 import { type ITask } from 'tasks/domain';
 import { type createTaskDTO } from 'tasks/application/useCases/createTask/DTO';
 

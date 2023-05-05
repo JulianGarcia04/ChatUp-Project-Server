@@ -1,4 +1,4 @@
-import { type toModel } from 'common';
+import { type toModel } from 'src/common';
 import { type ITask, TaskImplementation } from 'src/tasks/domain';
 import { IsDelete, CreatedDate } from 'common/domain';
 

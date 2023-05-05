@@ -19,7 +19,7 @@ import {
   FindTaskController,
 } from 'tasks/infrastructure/controllers';
 import { ToDomainTask, ToJSONTask } from 'tasks/infrastructure/models';
-import { ToDomainException, ToJSONException, ToJSONMessage } from 'common';
+import { ToDomainException, ToJSONException, ToJSONMessage } from 'src/common';
 
 // Models
 export const toDomainException = new ToDomainException();

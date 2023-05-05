@@ -1,5 +1,5 @@
 import Config from './app';
-import { MongodbConnection } from 'common';
+import { MongodbConnection } from 'src/common';
 
 class Server extends Config {
   private readonly _PORT: number;
@@ -36,4 +36,6 @@ class Server extends Config {
   }
 }
 
-new Server().listen();
+export const server = new Server();
+
+server.listen();

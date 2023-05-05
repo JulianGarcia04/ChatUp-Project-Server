@@ -1,8 +1,4 @@
-import {
-  type Messsage,
-  type UseCase,
-  MessageImplementation,
-} from 'common/index';
+import { type Messsage, type UseCase, MessageImplementation } from 'src/common';
 import { type IOneTask, type IEditTask } from 'tasks/application';
 import { RequiredParams, TaskNotFound } from 'tasks/application/exceptions';
 import { type ITask } from 'tasks/domain';

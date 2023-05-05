@@ -6,7 +6,7 @@ import { ExceptionImplementation } from 'common/domain/implementations';
 import { type IAllTask } from 'tasks/application/repositories/ITaskRepository';
 import { type DTO } from 'tasks/application/useCases/getAllTask/DTO';
 import { type ITask } from 'tasks/domain';
-import { type toModel } from 'common';
+import { type toModel } from 'src/common';
 
 const DATA = [
   {

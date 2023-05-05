@@ -8,7 +8,7 @@ import {
 import { TaskNotFound, CantDeleteTask } from 'tasks/application/exceptions';
 import { MessageImplementation } from 'common/domain/implementations';
 import { DeleteTask } from 'tasks/application/useCases';
-import { type toModel } from 'common';
+import { type toModel } from 'src/common';
 import { type ITask } from 'tasks/domain';
 import { type DTO } from 'tasks/application/useCases/deleteTask/DTO';
 

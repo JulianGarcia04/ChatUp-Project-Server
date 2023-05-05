@@ -6,7 +6,7 @@ import {
 import { type ITask } from 'tasks/domain';
 import { ChangeBodyTask } from 'tasks/application/useCases';
 import { type DTO } from 'src/tasks/application/useCases/changeBodyTask/DTO';
-import { type toModel } from 'common';
+import { type toModel } from 'src/common';
 import {
   // MessageImplementation,
   ExceptionImplementation,

@@ -1,4 +1,4 @@
-import { type toModel } from 'common';
+import { type toModel } from 'src/common';
 import { type Messsage, type Exception } from 'common/domain';
 
 export class ToJSONMessage implements toModel<Messsage, Messsage> {
