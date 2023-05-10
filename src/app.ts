@@ -6,6 +6,7 @@ import { parserQueryUrl } from 'common/infrastructure';
 import {
   errorInterceptor,
   errorPresentation,
+  errorParser,
 } from 'common/infrastructure/middlewares/ErrorHandler';
 
 abstract class Config {
@@ -17,6 +18,7 @@ abstract class Config {
     this._app.use(morgan('dev'));
     adminRouter(this._app);
     this._app.use(errorInterceptor);
+    this._app.use(errorParser);
     this._app.use(errorPresentation);
   }
 

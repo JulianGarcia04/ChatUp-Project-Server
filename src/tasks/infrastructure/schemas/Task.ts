@@ -3,7 +3,7 @@ import { type ITask } from 'tasks/domain';
 
 const Task = new mongodb.orm.Schema<ITask>({
   id: {
-    type: String,
+    type: mongodb.orm.Schema.Types.Mixed,
     required: true,
   },
   title: {
