@@ -1,4 +1,7 @@
 function parserString(str: string): any {
+  if (str === 'null') {
+    return null;
+  }
   // intentar convertir la cadena en un número entero
   const num = parseInt(str);
   if (!isNaN(num)) {

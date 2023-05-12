@@ -1,8 +1,7 @@
 import { type IController } from 'common/infrastructure';
 import { type Request, type Response, type NextFunction } from 'express';
-import { createTaskUseCase, toJSONMessage } from 'src/container';
+import { createTaskUseCase, toJSONMessage, uuid } from 'src/container';
 import validator from '../validator';
-import { v4 } from 'uuid';
 
 class CreateTask implements IController {
   execute(req: Request, res: Response, next: NextFunction): void {
@@ -11,7 +10,7 @@ class CreateTask implements IController {
     createTaskUseCase
       .execute({
         ...task,
-        id: task.id ?? v4(),
+        id: task.id ?? uuid.execute(),
       })
       .then(resPromise => {
         const message = toJSONMessage.execute(resPromise);

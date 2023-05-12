@@ -1,16 +1,15 @@
-import { type IController } from 'common/infrastructure';
+import { type IController, parserString } from 'common/infrastructure';
 import { type Request, type Response, type NextFunction } from 'express';
 import { getAllTasksUseCase, toJSONTask } from 'src/container';
 
 class FindTasks implements IController {
   execute(req: Request, res: Response, next: NextFunction): void {
     const { limit, skip, search, filters } = req.query;
-    console.log(req.query);
     getAllTasksUseCase
       .execute({
-        limit: parseInt(limit as string),
-        skip: parseInt(skip as string),
-        search: String(search),
+        limit: parserString(String(limit)),
+        skip: parserString(String(skip)),
+        search: parserString(String(search)),
         filter: filters,
       })
       .then(tasks => {

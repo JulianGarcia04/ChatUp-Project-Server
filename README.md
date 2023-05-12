@@ -30,11 +30,16 @@ This project has the clean architecture, this architecture is my first time in i
   - Input
     ##### Path
     ```
-        /api/v1/tasks/create
+      POST
+      /api/v1/tasks/create
     ```
     ##### Body
+    You can set the id field in case where you dont want to create a dependency with
+    the api and you have to control of the id generator, in case where you generate the id
+    in the client side, etc.
     ```
     {
+      "id"?: 1, // string | number | (optional)
       "title": "Lorem ipsum", // string
       "description": "This is lorem ipsum", // string
       "isReady" : false // boolean
@@ -51,7 +56,8 @@ This project has the clean architecture, this architecture is my first time in i
   ##### Path structure
 
   ```
-      /api/v1/tasks?[query]
+    GET
+    /api/v1/tasks?[query]
   ```
 
   ##### Query Structure
@@ -63,56 +69,57 @@ This project has the clean architecture, this architecture is my first time in i
   The API has the constanst which the is data that is differents to a filter, this constanst has values that you can't set a range beetween values, you only can set one value, but you can choose between use pagination or search engine, in short this constanst is optional. This constanst is:
 
   ```
-      limit: number
-      skip: number
-      search: string
+    limit: number
+    skip: number
+    search: string
   ```
 
   - Example
 
     - Input
       ```
-          /api/v1/tasks?limit=5&skip=0&search=restaurant
+        GET
+        /api/v1/tasks?limit=5&skip=0&search=restaurant
       ```
     - Output
       ```
-      [
-          {
-              id: 5,
-              title: "Go to the restaurant",
-              description: "Get the food for my wife",
-              isReady: true,
-              createdDate: '22/11/2020'
-          },
-          {
-              id: 7,
-              title: "Do reservation",
-              description: "I need to do the reservation for our anniversary",
-              isReady: true,
-              createdDate: '22/12/2020'
-          },
-          {
-              id: 10,
-              title: "Go to the market",
-              description: "I need to go to the market for buy the somethings for the restaurant",
-              isReady: true,
-              reatedDate: '22/03/2021'
-          },
-          {
-              id: 12
-              title: "setting up my first restaurant",
-              description: "Is my first business. Yeahhh!",
-              isReady: true,
-              createdDate: '1/01/2022'
-          },
-           {
-              id: 12
-              title: "setting up my second restaurant",
-              description: "Is my second business. Yeahhh!",
-              isReady: true,
-              createdDate: '24/03/2023'
-          },
-      ]
+        [
+            {
+                id: 5,
+                title: "Go to the restaurant",
+                description: "Get the food for my wife",
+                isReady: true,
+                createdDate: '22/11/2020'
+            },
+            {
+                id: 7,
+                title: "Do reservation",
+                description: "I need to do the reservation for our anniversary",
+                isReady: true,
+                createdDate: '22/12/2020'
+            },
+            {
+                id: 10,
+                title: "Go to the market",
+                description: "I need to go to the market for buy the somethings for the restaurant",
+                isReady: true,
+                reatedDate: '22/03/2021'
+            },
+            {
+                id: 12
+                title: "setting up my first restaurant",
+                description: "Is my first business. Yeahhh!",
+                isReady: true,
+                createdDate: '1/01/2022'
+            },
+            {
+                id: 12
+                title: "setting up my second restaurant",
+                description: "Is my second business. Yeahhh!",
+                isReady: true,
+                createdDate: '24/03/2023'
+            },
+        ]
       ```
       In this example, I set the query with limit and skip constants which is for get the data with
       pagination, and also I set the search constant for do one search
@@ -129,7 +136,8 @@ This project has the clean architecture, this architecture is my first time in i
       - Input
 
       ```
-      /api/v1/tasks/createdDate>=22/11/2020&createdDate<=31/12/2020&isReady=true
+        GET
+        /api/v1/tasks/createdDate>=22/11/2020&createdDate<=31/12/2020&isReady=true
       ```
 
       - Output
@@ -159,3 +167,80 @@ This project has the clean architecture, this architecture is my first time in i
         },
       ]
       ```
+
+- Find one
+
+  - Input
+    ##### Path structure
+    ```
+      GET
+      /api/v1/tasks/:id
+    ```
+  - Output
+
+    ##### Status code
+
+    ```
+      200
+    ```
+
+    ##### Body responde
+
+    ```
+    {
+        id: 5,
+        title: "Go to the restaurant",
+        description: "Get the food for my wife",
+        isReady: true,
+        createdDate: '22/11/2020'
+    }
+    ```
+
+- Update
+
+  - Input
+
+    ##### Path structure
+
+    ```
+      PUT
+      /api/v1/tasks/update/:id
+    ```
+
+    ##### Body Request
+
+    Only you can change the body task for example the title, description, and isReady data.
+
+    Structure:
+
+    ```
+      {
+        title: string,
+        description: string,
+        isReady: boolean
+      }
+    ```
+
+    For example:
+
+    ```
+      {
+        title: 'Ahora esto va a ser un hola mundo'
+      }
+    ```
+
+  - Output
+
+    ##### Status code
+
+    ```
+      202
+    ```
+
+    ##### Body
+
+    ```
+      {
+        message: string
+      }
+    ```

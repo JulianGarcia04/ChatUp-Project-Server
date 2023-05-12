@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 const validator = z.object({
-  id: z.string().uuid().or(z.number().positive().int()),
+  id: z.string().uuid().or(z.number().positive().int()).optional(),
   title: z
     .string({
       required_error: 'title is required',

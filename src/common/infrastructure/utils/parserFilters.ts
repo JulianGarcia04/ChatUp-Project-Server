@@ -31,7 +31,6 @@ const parserFilter = (filters: any[], baseCondition?: any): any => {
       };
     }
   });
-  console.log(condition);
   return condition;
 };
 

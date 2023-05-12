@@ -18,8 +18,14 @@ import {
   UpdateTaskController,
   FindTaskController,
 } from 'tasks/infrastructure/controllers';
+
+import { Uuid } from 'common/infrastructure/wrappers';
 import { ToDomainTask, ToJSONTask } from 'tasks/infrastructure/models';
 import { ToDomainException, ToJSONException, ToJSONMessage } from 'src/common';
+
+// Wrappers
+
+export const uuid = new Uuid();
 
 // Models
 export const toDomainException = new ToDomainException();

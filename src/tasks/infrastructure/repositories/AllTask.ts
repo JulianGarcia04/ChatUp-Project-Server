@@ -32,7 +32,6 @@ class AllTask implements IAllTask {
     const objFilters = parserFilters(filters, baseQuery);
     tasks = await Task.find(objFilters).skip(skip).limit(limit);
     const tasksDomain = tasks.map(task => toDomainTask.execute(task));
-    console.log(tasksDomain);
     return tasksDomain;
   }
 

@@ -17,8 +17,6 @@ class GetTaskById implements UseCase<ITask, IDTO> {
 
     const task = await this.OneTask.withId(props.id);
 
-    console.log(task);
-
     if (task === null) {
       throw new TaskNotFound();
     }

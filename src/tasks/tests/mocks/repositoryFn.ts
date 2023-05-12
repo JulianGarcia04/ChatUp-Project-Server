@@ -11,8 +11,6 @@ class RepositorysMockFns {
 
   // mock get all task
   async findAll(filter?: unknown, search?: string): Promise<ITask[]> {
-    console.log('this is a filter', filter);
-    console.log('this is a search prop', search);
     if (filter == null && search == null) {
       return this.tasks;
     } else if (filter == null && search != null) {
