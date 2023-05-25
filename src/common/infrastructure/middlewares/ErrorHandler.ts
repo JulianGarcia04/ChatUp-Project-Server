@@ -40,12 +40,14 @@ export const errorPresentation: ErrorRequestHandler = (
   res,
   next,
 ): void => {
-  if (config.ENVIROMENT === 'development' || config.ENVIROMENT === 'test') {
+  if (config.ENVIROMENT === 'development') {
     const error = toJSONException.execute(toDomainException.execute(err));
     console.log(error);
     res.status(error.code).json(error);
-
     return;
+  } else if (config.ENVIROMENT === 'test') {
+    const error = toJSONException.execute(toDomainException.execute(err));
+    res.status(error.code).json(error);
   }
 
   if (err instanceof ExceptionImplementation) {

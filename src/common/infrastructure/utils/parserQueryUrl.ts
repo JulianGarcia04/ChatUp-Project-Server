@@ -6,11 +6,14 @@ const parserQueryUrl = (str: string): any => {
   const queryEntries = Object.entries(parse(str));
   // join the key with the values
   const stringQuery = queryEntries.map(q => {
-    return q.join('=');
+    const qWithoutEmptyElement = q.filter(e => e?.length !== 0);
+    return qWithoutEmptyElement.join('=');
   });
   // detach string value in string that check with the expresion regular
   const stringQueryParse = stringQuery.map(strQuery => {
-    return strQuery.match(/(([a-z])\w+|([|]|[<>]=?|=)+|\d+)/g);
+    return strQuery.match(
+      /(\b(\d{1,2}[-/]\d{1,2}[-/]\d{4}|\d{4}[-/]\d{2}[-/]\d{2})\b|([a-z])\w+|([|]|[<>]=?|=)+|\d+)/g,
+    );
   });
   // and after map the strings to the filter structure
   const filters = stringQueryParse

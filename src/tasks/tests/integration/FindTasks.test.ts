@@ -43,5 +43,24 @@ describe('GET (/tasks/create) - integration test of find tasks controller, get a
       expect(request.body).toHaveLength(2);
       expect(request.statusCode).toBe(200);
     });
+
+    test('then i going to set filters, for example i going to filter as created date, then must return the data with has the conditions', async () => {
+      const filter = `createdDate<2020/12/31&createdDate>1/11/2020`;
+      const url = `/api/v1/tasks?${filter}`;
+
+      const request = await api.get(url);
+
+      expect(request.body).toHaveLength(2);
+      expect(request.statusCode).toBe(200);
+    });
+
+    test('then i dont going to set filters, then must return all tasks', async () => {
+      const url = `/api/v1/tasks`;
+
+      const request = await api.get(url);
+
+      expect(request.body).toHaveLength(5);
+      expect(request.statusCode).toBe(200);
+    });
   });
 });

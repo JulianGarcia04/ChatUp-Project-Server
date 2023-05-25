@@ -7,7 +7,7 @@
     "dev": "docker compose down && docker compose rm && docker compose -f docker-compose-dev.yml up -d && NODE_ENV=development nodemon src/index.ts",
     "build": "tsc",
     "start": "docker compose down && docker compose rm && docker compose -f docker-compose.yml up -d && npm run build && NODE_ENV=production node dist/index.js",
-    "test": "docker compose down && docker compose rm && docker compose -f docker-compose-testing.yml up -d && NODE_ENV=test jest --watch --detectOpenHandles --no-cache --runInBand",
+    "test": "docker compose down && docker compose rm && docker compose -f docker-compose-testing.yml up -d && NODE_ENV=test jest --watch --detectOpenHandles --no-cache --runInBand --silent",
     "lint": "eslint src/",
     "lint-fix": "eslint src/ --fix",
     "format:check": "npx prettier --check ./src"

@@ -2,6 +2,15 @@ function parserString(str: string): any {
   if (str === 'null') {
     return null;
   }
+
+  const check = str.match(
+    /\b(\d{1,2}[-/]\d{1,2}[-/]\d{4}|\d{4}[-/]\d{2}[-/]\d{2})\b/g,
+  );
+
+  if (check != null && check?.length > 0) {
+    return new Date(str);
+  }
+
   // intentar convertir la cadena en un número entero
   const num = parseInt(str);
   if (!isNaN(num)) {
