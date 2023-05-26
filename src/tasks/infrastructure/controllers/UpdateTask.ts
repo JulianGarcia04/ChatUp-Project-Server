@@ -1,4 +1,4 @@
-import { type IController } from 'common/infrastructure';
+import { parser, type IController } from 'common/infrastructure';
 import { updateTaskUseCase, toJSONMessage } from 'src/container';
 import { type Request, type Response, type NextFunction } from 'express';
 
@@ -7,7 +7,7 @@ class UpdateTask implements IController {
     const body = req.body;
     const { id } = req.params;
     updateTaskUseCase
-      .execute({ id, body })
+      .execute({ id: parser(id), body })
       .then(result => {
         const message = toJSONMessage.execute(result);
         res.status(message.code).json({ message: message.message });

@@ -10,3 +10,4 @@ export { default as LimitMustBeGreatThanToZero } from './limitMustBeGreatThanToZ
 export { default as SkipMustBeGreatEqualThanToZero } from './skipMustBeGreatEqualThanToZero';
 export { default as CantFoundTasks } from './cantFoundTasks';
 export { default as RequiredParams } from './requiredParams';
+export { default as CantBeEmpty } from './cantBeEmpty';

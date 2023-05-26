@@ -1,5 +1,5 @@
 import { parse } from 'node:querystring';
-import parserString from './parserString';
+import parser from './parser';
 
 const parserQueryUrl = (str: string): any => {
   // parse to object string query in object and after get key and values
@@ -33,7 +33,7 @@ const parserQueryUrl = (str: string): any => {
             filterModel.push(filterStr + '=');
             continue;
           }
-          filterModel.push(parserString(filterStr));
+          filterModel.push(parser(filterStr));
           if (i === filter.length - 1) {
             accFilters.push(filterModel);
           }

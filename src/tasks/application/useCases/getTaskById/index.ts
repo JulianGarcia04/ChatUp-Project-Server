@@ -11,7 +11,7 @@ class GetTaskById implements UseCase<ITask, IDTO> {
   }
 
   async execute(props: IDTO): Promise<ITask> {
-    if (props.id.toString().length === 0 || props.id === 0) {
+    if (props.id.toString().length === 0 || Number(props.id) <= 0) {
       throw new IncorrectId();
     }
 

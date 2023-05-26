@@ -1,4 +1,4 @@
-function parserString(str: string): any {
+function parser(str: string): any {
   if (str === 'null') {
     return null;
   }
@@ -34,4 +34,4 @@ function parserString(str: string): any {
   return str;
 }
 
-export default parserString;
+export default parser;

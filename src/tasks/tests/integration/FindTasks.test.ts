@@ -19,7 +19,7 @@ afterAll(async () => {
   await mongodb.orm.connection.close();
 });
 
-describe('GET (/tasks/create) - integration test of find tasks controller, get all tasks usecase and all task repository', () => {
+describe('GET (/tasks) - integration test of find tasks controller, get all tasks usecase and all task repository', () => {
   describe('tests where check the query request and how its works', () => {
     test('then i going to set the a limit and skip in the request url and must return array with objects according to this params', async () => {
       const limit = 5;

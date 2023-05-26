@@ -5,7 +5,7 @@ import { toDomainTask } from 'src/container';
 
 class OneTask implements IOneTask {
   async withId(id: string | number): Promise<ITask | null> {
-    const findTask = await Task.findOne({ id });
+    const findTask = await Task.findOne({ id, isDelete: false });
     const task = findTask != null ? toDomainTask.execute(findTask) : null;
     return task;
   }

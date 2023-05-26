@@ -6,7 +6,7 @@ export {
   queryOperators,
   parserFilters,
   parserQueryUrl,
-  parserString,
+  parser,
 } from './utils';
 export { MongodbConnection } from './db';
 export { ToJSONException, ToJSONMessage, ToDomainException } from './models';

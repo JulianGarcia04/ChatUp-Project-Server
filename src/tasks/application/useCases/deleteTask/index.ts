@@ -3,7 +3,11 @@ import { type DTO } from './DTO';
 import { type Messsage } from 'common/domain/interfaces/Message';
 import { MessageImplementation } from 'common/domain/implementations';
 import { type IEditTask, type IOneTask } from 'tasks/application';
-import { TaskNotFound, CantDeleteTask } from 'tasks/application/exceptions';
+import {
+  TaskNotFound,
+  CantDeleteTask,
+  IncorrectId,
+} from 'tasks/application/exceptions';
 
 class DeleteTask implements UseCase<Messsage, DTO> {
   private readonly oneTask: IOneTask;
@@ -15,6 +19,9 @@ class DeleteTask implements UseCase<Messsage, DTO> {
   }
 
   async execute(props: DTO): Promise<Messsage> {
+    if (props.id == null || Number(props.id) <= 0) {
+      throw new IncorrectId();
+    }
     const isExists = await this.oneTask.withId(props.id);
     if (isExists == null) {
       throw new TaskNotFound();
@@ -27,7 +34,7 @@ class DeleteTask implements UseCase<Messsage, DTO> {
     const task = await this.oneTask.withId(props.id);
 
     const isDeleted = task?.isDelete;
-    if (isDeleted === undefined || !isDeleted) {
+    if (isDeleted != null && !isDeleted) {
       throw new CantDeleteTask();
     }
 
