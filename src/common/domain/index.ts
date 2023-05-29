@@ -1,13 +1,15 @@
 export {
   ExceptionImplementation,
   MessageImplementation,
-  CreatedDate,
-  IsDelete,
+  CreatedDateImplementation,
+  IsDeleteImplementation,
+  IdImplementation,
 } from './implementations';
 
 export {
   type Exception,
-  type IisDelete,
+  type IsDelete,
   type Messsage,
-  type createdDate,
+  type CreatedDate,
+  type Id,
 } from './interfaces';

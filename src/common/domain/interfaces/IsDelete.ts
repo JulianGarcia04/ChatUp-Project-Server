@@ -1,3 +1,3 @@
-export interface IisDelete {
+export interface IsDelete {
   readonly isDelete: boolean;
 }

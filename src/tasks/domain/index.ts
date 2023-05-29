@@ -1,2 +1,2 @@
 export { TaskImplementation } from './entities';
-export { type ITask, type TaskProps } from './interfaces';
+export { type ITask } from './interfaces';

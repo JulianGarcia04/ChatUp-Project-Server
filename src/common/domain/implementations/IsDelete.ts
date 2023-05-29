@@ -1,6 +1,6 @@
-import { type IisDelete } from '../interfaces';
+import { type IsDelete } from '../interfaces';
 
-class IsDelete implements IisDelete {
+class IsDeleteImplementation implements IsDelete {
   private readonly _isDelete: boolean;
 
   private constructor(initialValue: boolean) {
@@ -11,10 +11,10 @@ class IsDelete implements IisDelete {
     return this._isDelete;
   }
 
-  static create(initialValue?: boolean): IisDelete {
-    const isDelete = new IsDelete(initialValue ?? false);
+  static create(initialValue?: boolean): IsDelete {
+    const isDelete = new IsDeleteImplementation(initialValue ?? false);
     return isDelete;
   }
 }
 
-export default IsDelete;
+export default IsDeleteImplementation;

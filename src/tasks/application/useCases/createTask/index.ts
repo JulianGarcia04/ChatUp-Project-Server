@@ -12,8 +12,9 @@ import {
 } from '../../exceptions';
 import {
   MessageImplementation,
-  CreatedDate,
-  IsDelete,
+  CreatedDateImplementation,
+  IsDeleteImplementation,
+  IdImplementation,
 } from 'common/domain/implementations';
 
 class CreateTask implements UseCase<MessageImplementation, createTaskDTO> {
@@ -32,9 +33,15 @@ class CreateTask implements UseCase<MessageImplementation, createTaskDTO> {
       throw new TaskIsDuplicate();
     }
     // check that the task domain object be created
-    const isDelete = IsDelete.create().isDelete;
-    const createdDate = CreatedDate.create().createdDate;
-    const task = TaskImplementation.create({ ...props, isDelete, createdDate });
+    const id = IdImplementation.create(props.id).id;
+    const isDelete = IsDeleteImplementation.create().isDelete;
+    const createdDate = CreatedDateImplementation.create().createdDate;
+    const task = TaskImplementation.create({
+      ...props,
+      id,
+      isDelete,
+      createdDate,
+    });
     if (task == null && !task) {
       throw new CantCreatedDomainObject();
     }

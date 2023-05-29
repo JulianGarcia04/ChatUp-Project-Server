@@ -1,3 +1,3 @@
-export interface createdDate {
+export interface CreatedDate {
   readonly createdDate: Date;
 }
