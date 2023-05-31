@@ -47,7 +47,7 @@ class UserImplementation implements User {
     return this._props.pin;
   }
 
-  get lastTime(): Date {
+  get lastTime(): Date | undefined {
     return this._props.lastTime;
   }
 

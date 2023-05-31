@@ -9,7 +9,7 @@ import { type User } from 'users/domain/interfaces';
 export interface IAllUsers extends IAllRepository<User> {}
 
 export interface IOneUser extends IOneRepository<User> {
-  withAnotherProp(prop: any): Promise<User | null>;
+  withAnotherProp(prop: unknown): Promise<User | null>;
 }
 
 export interface ICreateUser extends ICreateRepository<User> {}

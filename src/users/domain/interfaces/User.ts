@@ -10,6 +10,6 @@ export interface User extends Id, IsDelete, CreatedDate {
   phone: number;
   email: string;
   pin: number;
-  lastTime: Date;
+  lastTime?: Date;
   isOnline: boolean;
 }
