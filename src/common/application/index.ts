@@ -4,4 +4,5 @@ export {
   type IEditRepository,
   type IOneRepository,
   type UseCase,
+  type HandleCookies,
 } from './interfaces';

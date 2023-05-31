@@ -1,7 +1,7 @@
 import { SignIn, type DTO } from 'users/application/useCases/signIn';
 import type { IOneUser } from 'users/application/repositories';
 import type { User } from 'src/users/domain/interfaces';
-import { MessageImplementation } from 'src/common';
+import { MessageImplementation, type HandleCookies } from 'src/common';
 import { MockClass } from 'src/common/mocks';
 import {
   OnlyPhone,
@@ -9,7 +9,8 @@ import {
   BothProps,
 } from 'users/application/useCases/signIn/states';
 import RepositoryFns from '../utils/RepositoryFns';
-import { initialData } from '../utils/initialData';
+import { initialData, token } from '../utils/initialData';
+import type { HandleToken } from 'src/users/application/services';
 
 const repositoryFns = new RepositoryFns([]);
 
@@ -24,6 +25,20 @@ const OneUserRepositoryMock = MockClass(
     async (id: string | number) => await repositoryFns.findById(id),
     async (prop: unknown) => await repositoryFns.findOne(prop as User),
   ],
+);
+
+const ServiceCookies = MockClass(
+  ['setCookie', 'getCookie', 'deleteCookie'],
+  [
+    (key: string, value: unknown, expire: Date) => {},
+    (key: string): unknown => token as unknown,
+    (key: string) => {},
+  ],
+);
+
+const ServiceToken = MockClass(
+  ['generate', 'decode', 'validate'],
+  [(data: unknown) => token, (token: string) => {}, (token: string) => true],
 );
 
 describe('Unit test of the Sign In use case', () => {
@@ -43,10 +58,17 @@ describe('Unit test of the Sign In use case', () => {
     isDelete: false,
   };
   const oneUserRepository = new OneUserRepositoryMock() as IOneUser;
+  const serviceCookies = new ServiceCookies() as HandleCookies;
+  const serviceToken = new ServiceToken() as HandleToken<unknown>;
   describe('Test of the execute method of the SignIn class', () => {
     test('test when set the props param with empty object, then must throw a error', async () => {
       const initialState = new OnlyPhone();
-      const signIn = new SignIn(oneUserRepository, initialState);
+      const signIn = new SignIn(
+        oneUserRepository,
+        serviceCookies,
+        serviceToken,
+        initialState,
+      );
       const props: DTO = {};
 
       const executeFn = signIn.execute(props);
@@ -57,7 +79,12 @@ describe('Unit test of the Sign In use case', () => {
     describe('test when the sign in is in two steps, when first set the email and after set the password', () => {
       test('test when set one params (phone) in the props object param then must return confirm message with continue', async () => {
         const initialState = new OnlyPhone();
-        const signIn = new SignIn(oneUserRepository, initialState);
+        const signIn = new SignIn(
+          oneUserRepository,
+          serviceCookies,
+          serviceToken,
+          initialState,
+        );
         const props: DTO = { phone: 3023001508 };
 
         const executeFn = await signIn.execute(props);
@@ -68,7 +95,12 @@ describe('Unit test of the Sign In use case', () => {
 
       test('test when only set the pin param in the props object param then must throw error', async () => {
         const initialState = new OnlyPin();
-        const signIn = new SignIn(oneUserRepository, initialState);
+        const signIn = new SignIn(
+          oneUserRepository,
+          serviceCookies,
+          serviceToken,
+          initialState,
+        );
         const props: DTO = { pin: 12345 };
 
         const executeFn = await signIn.execute(props, foundUser);
@@ -80,7 +112,12 @@ describe('Unit test of the Sign In use case', () => {
 
     test('test when set the both props (phone, pin) then must do the Sign In normally, then must return a confirm message', async () => {
       const initialState = new BothProps();
-      const signIn = new SignIn(oneUserRepository, initialState);
+      const signIn = new SignIn(
+        oneUserRepository,
+        serviceCookies,
+        serviceToken,
+        initialState,
+      );
       const props: DTO = { phone: 3023001508, pin: 12345 };
 
       const executeFn = await signIn.execute(props);

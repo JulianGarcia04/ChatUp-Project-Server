@@ -6,3 +6,4 @@ export {
 } from './IBaseRepository';
 
 export { type UseCase } from './UseCase';
+export type { HandleCookies } from './HandleCookies';
