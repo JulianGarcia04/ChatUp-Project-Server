@@ -11,8 +11,8 @@ class IdImplementation implements Id {
     return this._id;
   }
 
-  public static create(id: string | number): Id {
-    return new IdImplementation(id);
+  public static create(id: string | number): string | number {
+    return new IdImplementation(id).id;
   }
 }
 

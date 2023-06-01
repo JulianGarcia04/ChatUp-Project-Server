@@ -19,8 +19,8 @@ class UserImplementation implements User {
     return this._props.lastname;
   }
 
-  get about(): string {
-    return this._props.about;
+  get about(): string | undefined {
+    return this._props?.about;
   }
 
   get genre(): string {
@@ -56,7 +56,7 @@ class UserImplementation implements User {
   }
 
   get createdDate(): Date {
-    return this._props.createdDate;
+    return this._props?.createdDate;
   }
 
   get isDelete(): boolean {

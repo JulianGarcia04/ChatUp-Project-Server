@@ -3,7 +3,7 @@ import {
   type ICreateRepository,
   type IEditRepository,
   type IOneRepository,
-} from 'common/application/interfaces/IBaseRepository';
+} from 'src/common/application';
 import { type ITask } from 'tasks/domain/interfaces/ITask';
 
 export interface IAllTask extends IAllRepository<ITask> {}

@@ -10,7 +10,7 @@ class ToDomainTask implements toModel<unknown, ITask> {
   execute(props: unknown): ITask {
     const { id, title, description, isReady, isDelete, createdDate } =
       props as ITask;
-    const idDomain = IdImplementation.create(id).id;
+    const idDomain = IdImplementation.create(id);
     const isDeleteDomain = IsDeleteImplementation.create(isDelete).isDelete;
     const createdDateDomain =
       CreatedDateImplementation.create(createdDate).createdDate;

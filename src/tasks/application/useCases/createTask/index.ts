@@ -33,7 +33,7 @@ class CreateTask implements UseCase<MessageImplementation, createTaskDTO> {
       throw new TaskIsDuplicate();
     }
     // check that the task domain object be created
-    const id = IdImplementation.create(props.id).id;
+    const id = IdImplementation.create(props.id);
     const isDelete = IsDeleteImplementation.create().isDelete;
     const createdDate = CreatedDateImplementation.create().createdDate;
     const task = TaskImplementation.create({

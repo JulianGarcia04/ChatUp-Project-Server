@@ -3,7 +3,7 @@ import {
   type ICreateRepository,
   type IEditRepository,
   type IOneRepository,
-} from 'common/application/interfaces/IBaseRepository';
+} from 'src/common/application';
 import { type User } from 'users/domain/interfaces';
 
 export interface IAllUsers extends IAllRepository<User> {}
