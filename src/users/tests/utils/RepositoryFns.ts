@@ -7,6 +7,10 @@ class UserRepository {
     this.users = initialUsers;
   }
 
+  async create(userDomain: User): Promise<void> {
+    this.users.push(userDomain);
+  }
+
   async findById(id: string | number): Promise<User | null> {
     const user = this.users.find(user => user.id === id);
     return user != null ? user : null;

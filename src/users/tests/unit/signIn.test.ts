@@ -1,16 +1,16 @@
-import { SignIn, type DTO } from 'users/application/useCases/signIn';
-import type { IOneUser } from 'users/application/repositories';
-import type { User } from 'src/users/domain/interfaces';
 import { MessageImplementation, type HandleCookies } from 'src/common';
-import { MockClass } from 'src/common/mocks';
+import { SignIn, type DTO } from 'users/application/useCases/signIn';
+import type { HandleToken } from 'src/users/application/services';
+import type { IOneUser } from 'users/application/repositories';
+import { initialData, token } from '../utils/initialData';
+import type { User } from 'src/users/domain/interfaces';
+import RepositoryFns from '../utils/RepositoryFns';
 import {
   OnlyPhone,
   OnlyPin,
   BothProps,
 } from 'users/application/useCases/signIn/states';
-import RepositoryFns from '../utils/RepositoryFns';
-import { initialData, token } from '../utils/initialData';
-import type { HandleToken } from 'src/users/application/services';
+import { MockClass } from 'src/common/mocks';
 
 const repositoryFns = new RepositoryFns([]);
 

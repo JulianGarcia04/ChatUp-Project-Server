@@ -11,14 +11,33 @@ class AgeImplementation implements Age {
     return this._age;
   }
 
-  public static create(birthdate: Date, age?: number): number {
-    if (age == null) {
-      const nowYear = new Date(Date.now()).getUTCFullYear();
-      const birthYear = birthdate.getUTCFullYear();
-      return new AgeImplementation(nowYear - birthYear).age;
+  public static create(birthDate: Date, age?: number): number {
+    if (age != null) {
+      return new AgeImplementation(age).age;
     }
+    const nowDate = new Date(Date.now());
+    // now date info
+    const nowDay = nowDate.getUTCDate();
 
-    return new AgeImplementation(age).age;
+    const nowMonth = nowDate.getUTCMonth();
+
+    const nowYear = nowDate.getUTCFullYear();
+
+    // birth date info
+    const birthDay = birthDate.getUTCDate();
+
+    const birthMonth = birthDate.getUTCMonth();
+
+    const birthYear = birthDate.getUTCFullYear();
+
+    if (
+      (nowMonth <= birthMonth && nowDay <= birthDay) ||
+      nowMonth <= birthMonth
+    ) {
+      return new AgeImplementation(nowYear - birthYear).age;
+    } else {
+      return new AgeImplementation(nowYear - birthYear - 1).age;
+    }
   }
 }
 
