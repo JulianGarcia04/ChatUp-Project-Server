@@ -8,7 +8,13 @@ import {
 } from 'src/common';
 import { type DTO } from './DTO';
 import type { IOneUser, ICreateUser } from 'users/application/repositories';
-import type { CreateId } from 'common/application';
+import {
+  type IdGenerator,
+  PropertyIsNull,
+  EntityHasAlreadyBeenCreated,
+  CantBeSave,
+} from 'common/application';
+import { isNull } from 'common/application/utils';
 import {
   UserImplementation,
   IsOnlineImplementation,
@@ -18,12 +24,12 @@ import {
 export class SignUp implements UseCase<Messsage, DTO> {
   oneUserRepository: IOneUser;
   createUserRepository: ICreateUser;
-  createIdService: CreateId;
+  createIdService: IdGenerator;
 
   constructor(
     oneUserRepository: IOneUser,
     createUserRepository: ICreateUser,
-    createIdService: CreateId,
+    createIdService: IdGenerator,
   ) {
     this.oneUserRepository = oneUserRepository;
     this.createUserRepository = createUserRepository;
@@ -31,14 +37,20 @@ export class SignUp implements UseCase<Messsage, DTO> {
   }
 
   async execute(props: DTO): Promise<Messsage> {
+    const isNullProperties = isNull<DTO>(props, ['id']);
+
+    if (!isNullProperties.success && isNullProperties.key != null) {
+      throw new PropertyIsNull(isNullProperties?.key);
+    }
+
     const newId = this.createIdService.execute();
 
     const id = IdImplementation.create(props.id ?? newId);
 
-    const isExitsUser = this.oneUserRepository.withId(id);
+    const isExitsUser = await this.oneUserRepository.withId(id);
 
     if (isExitsUser != null) {
-      throw new Error();
+      throw new EntityHasAlreadyBeenCreated('user');
     }
 
     const isDelete = IsDeleteImplementation.create().isDelete;
@@ -60,10 +72,10 @@ export class SignUp implements UseCase<Messsage, DTO> {
 
     await this.createUserRepository.save(user);
 
-    const isSavedCorrecly = this.oneUserRepository.withId(user.id);
+    const wasSavedCorrecly = await this.oneUserRepository.withId(user.id);
 
-    if (isSavedCorrecly == null) {
-      throw new Error();
+    if (wasSavedCorrecly == null) {
+      throw new CantBeSave('user');
     }
 
     return new MessageImplementation({

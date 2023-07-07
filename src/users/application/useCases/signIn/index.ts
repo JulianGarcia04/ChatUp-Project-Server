@@ -32,12 +32,12 @@ export class SignIn implements UseCase<unknown, DTO> {
     this.state.setContext(this);
   }
 
-  async execute(props: DTO, foundUser?: User): Promise<unknown> {
+  async execute(props: DTO): Promise<unknown> {
     if (Object.entries(props).length === 0) {
       throw new Error();
     }
 
-    return await this.state.execute(props, foundUser);
+    return await this.state.execute(props);
   }
 }
 

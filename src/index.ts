@@ -42,7 +42,7 @@ class Server extends Config {
           });
       })
       .catch(e => {
-        console.log(e);
+        console.log('No se pudo conectar a la base de datos');
       });
   }
 }

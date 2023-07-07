@@ -101,9 +101,9 @@ describe('Unit test of the Sign In use case', () => {
           serviceToken,
           initialState,
         );
-        const props: DTO = { pin: 12345 };
+        const props: DTO = { pin: 12345, foundUser };
 
-        const executeFn = await signIn.execute(props, foundUser);
+        const executeFn = await signIn.execute(props);
 
         expect(executeFn).toBeInstanceOf(MessageImplementation);
         expect(executeFn).toHaveProperty('message', 'welcome to the jungle');

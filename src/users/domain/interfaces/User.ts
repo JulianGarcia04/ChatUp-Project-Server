@@ -7,7 +7,7 @@ export interface User extends Id, IsDelete, CreatedDate, IsOnline, Age {
   about?: string;
   genre: string;
   birthdate: Date;
-  phone: number;
+  phone: number | string;
   email: string;
   pin: number;
   lastTime?: Date;

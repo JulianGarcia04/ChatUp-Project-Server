@@ -22,6 +22,13 @@ import {
 import { Uuid } from 'common/infrastructure/wrappers';
 import { ToDomainTask, ToJSONTask } from 'tasks/infrastructure/models';
 import { ToDomainException, ToJSONException, ToJSONMessage } from 'src/common';
+import { HandleTokenService } from 'users/infrastructure/services';
+import { IdGeneratorService } from 'common/infrastructure/services';
+
+// Services
+
+export const tokenService = new HandleTokenService();
+export const idGeneratorService = new IdGeneratorService();
 
 // Wrappers
 

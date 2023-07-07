@@ -4,7 +4,7 @@ export interface DTO {
   lastname: string;
   genre: string;
   birthdate: Date;
-  phone: number;
+  phone: number | string;
   email: string;
   pin: number;
 }

@@ -1,5 +1,10 @@
-export interface HandleToken<DTO> {
-  generate(data: DTO): string;
-  decode(token: string): unknown;
-  validate(token: string): boolean;
+export interface HandleToken<
+  DTO,
+  GenerateOptions = undefined,
+  DecodeOptions = undefined,
+  ValidateOptions = undefined,
+> {
+  generate(data: DTO, options?: GenerateOptions): string;
+  decode(token: string, options?: DecodeOptions): unknown;
+  validate(token: string, options?: ValidateOptions): boolean;
 }
